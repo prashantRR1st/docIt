@@ -1,0 +1,73 @@
+<!--
+  Generated template for the DashboardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Dashboard</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="dashboard-main-container">
+    <h3>D<span class="thin">oc</span><b>I</b>t</h3>
+    <div class="avatar-conatainer">
+      <span class="badge">10Xp</span>
+      <img src="assets/img/profile.jpg">
+    </div>
+
+    <ion-slides (ionSlideDidChange)="slideChanged()">
+
+      <ion-slide>
+        <div class="box box-blue">
+          <h4><b>Real </b>Time Noti<span class="thin">fication</span></h4>
+          <p><b>G</b>et updates on the <b>go </b>and never miss <br /> <b>O</b>ut on the action</p>
+        </div>
+      </ion-slide>
+
+
+      <ion-slide>
+        <div class="box">
+          <h4 class="thin">Su<b>rgery </b>Mode</h4>
+          <p><b>Use</b> this mode to <b>F</b>ocus all your <span class="thin">Efforts</span> on <br />the Task<span class="thin"> at</span> hand </p>
+        </div>
+      </ion-slide>
+
+
+      <ion-slide>
+        <div class="box">
+          <h4>Connect <b>with your </b>Network</h4>
+          <p>Join your <b>Vast Community</b> of peers <br /><b>and Expand</b> your <span class="thin">Network</span> today!</p>
+        </div>
+      </ion-slide>
+
+    </ion-slides>
+
+  </div>
+
+  <h3>Recent Cases</h3>
+
+  <ion-card>
+    <ion-card-content>
+        <ion-card-header>Upper Femoral Epiphysis</ion-card-header>
+        <p>Slipped capital femoral epiphysis (SCFE or skiffy, slipped upper femoral epiphysis, SUFE or souffy, coxa vara adolescentium) is a medical term referring to a fracture through the growth plate (physis), which results in slippage of the overlying end of the femur (epiphysis).</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="box">
+        <ion-card-header>Segmental Spinal Myoclonus</ion-card-header>
+        <p>Myoclonus is a sudden, brief, involuntary muscle jerk. It is caused by abrupt muscle contraction, in the case of positive myoclonus, or by sudden cessation of ongoing muscular activity, in the case of negative myoclonus (NM).</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
