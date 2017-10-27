@@ -25,7 +25,9 @@ export class SearchPage {
       return;
     }
     this.currentItems = this.items.query({
-      name: val
+      title: val,
+      patientName: val,
+      about: val
     });
   }
 

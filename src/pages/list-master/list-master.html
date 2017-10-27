@@ -23,12 +23,32 @@
   <ion-list>
     <ion-item-sliding *ngFor="let item of currentItems">
       <button ion-item (click)="openItem(item)">
-        <ion-avatar item-start>
+        <ion-thumbnail item-start>
           <img [src]="item.profilePic" />
-        </ion-avatar>
-        <h2>{{item.name}}</h2>
+        </ion-thumbnail>
+        <h3>{{item.title}}</h3>
+        <h2>{{item.patientName}}</h2>
         <p>{{item.about}}</p>
-        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+        <ion-note item-end *ngIf="item.notes">{{item.notes}}</ion-note>
+
+        <ion-row padding-top>
+          <ion-col>
+            <ion-badge><ion-icon name="camera"></ion-icon> {{item.photos}}</ion-badge>
+          </ion-col>
+
+          <ion-col>
+            <ion-badge><ion-icon name="mic"></ion-icon> {{item.voiceMemos}}</ion-badge>
+          </ion-col>
+
+          <ion-col>
+            <ion-badge><ion-icon name="videocam"></ion-icon> {{item.videos}}</ion-badge>
+          </ion-col>
+
+          <ion-col>
+            <ion-badge><ion-icon name="paper"></ion-icon> {{item.notes}}</ion-badge>
+          </ion-col>
+
+        </ion-row>
       </button>
 
       <ion-item-options>

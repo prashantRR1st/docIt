@@ -7,48 +7,96 @@ export class Items {
   items: Item[] = [];
 
   defaultItem: any = {
-    "name": "Burt Bear",
+    "title": "title1",
+    "patientName": "Burt Gerald",
+    "date": "2017-10-26T18:25:43.511Z",
+    "notes":0,
+    "voiceMemos":0,
+    "videos":0,
+    "photos":0,
     "profilePic": "assets/img/speakers/bear.jpg",
-    "about": "Burt is a Bear.",
+    "about": "Burt Gerald is a .",
   };
 
 
   constructor() {
     let items = [
       {
-        "name": "Burt Bear",
+        "title": "Percutaneous vertebroplasty",
+        "patientName": "Burt Gerald",
+        "date": "2017-10-26T18:25:43.511Z",
+        "notes":0,
+        "voiceMemos":0,
+        "videos":0,
+        "photos":0,
         "profilePic": "assets/img/speakers/bear.jpg",
-        "about": "Burt is a Bear."
+        "about": "Burt Gerald is ill ."
       },
       {
-        "name": "Charlie Cheetah",
+        "title": "Interspinous process decompression",
+        "patientName": "Charlie Sheen",
+        "date": "2017-10-26T18:25:43.511Z",
+        "notes":0,
+        "voiceMemos":0,
+        "videos":0,
+        "photos":0,
         "profilePic": "assets/img/speakers/cheetah.jpg",
-        "about": "Charlie is a Cheetah."
+        "about": "Charlie Sheen is ill."
       },
       {
-        "name": "Donald Duck",
+        "title": "Krukenberg procedure",
+        "patientName": "Donald Trump",
+        "date": "2017-10-26T18:25:43.511Z",
+        "notes":0,
+        "voiceMemos":0,
+        "videos":0,
+        "photos":0,
         "profilePic": "assets/img/speakers/duck.jpg",
-        "about": "Donald is a Duck."
+        "about": "Donald Trump is ill."
       },
       {
-        "name": "Eva Eagle",
+        "title": "Microfracture surgery",
+        "patientName": "Eva Mendez",
+        "date": "2017-10-26T18:25:43.511Z",
+        "notes":0,
+        "voiceMemos":0,
+        "videos":0,
+        "photos":0,
         "profilePic": "assets/img/speakers/eagle.jpg",
-        "about": "Eva is an Eagle."
+        "about": "Eva is ill."
       },
       {
-        "name": "Ellie Elephant",
+        "title": "Taylor Spatial Frame",
+        "patientName": "Ellie Goldbloom",
+        "date": "2017-10-26T18:25:43.511Z",
+        "notes":0,
+        "voiceMemos":0,
+        "videos":0,
+        "photos":0,
         "profilePic": "assets/img/speakers/elephant.jpg",
-        "about": "Ellie is an Elephant."
+        "about": "Ellie is ill."
       },
       {
-        "name": "Molly Mouse",
+        "title": "Vertebral fixation",
+        "patientName": "Molly Weasley",
+        "date": "2017-10-26T18:25:43.511Z",
+        "notes":0,
+        "voiceMemos":0,
+        "videos":0,
+        "photos":0,
         "profilePic": "assets/img/speakers/mouse.jpg",
-        "about": "Molly is a Mouse."
+        "about": "Molly is ill."
       },
       {
-        "name": "Paul Puppy",
+        "title": "Olecranon fracture",
+        "patientName": "Paul Penrose",
+        "date": "2017-10-26T18:25:43.511Z",
+        "notes":0,
+        "voiceMemos":0,
+        "videos":0,
+        "photos":0,
         "profilePic": "assets/img/speakers/puppy.jpg",
-        "about": "Paul is a Puppy."
+        "about": "Paul is is ill."
       }
     ];
 
