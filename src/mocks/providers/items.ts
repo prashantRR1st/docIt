@@ -7,7 +7,8 @@ export class Items {
   items: Item[] = [];
 
   defaultItem: any = {
-    "title": "title1",
+    "id": 1,
+    "title": "Percutaneous vertebroplasty",
     "patientName": "Burt Gerald",
     "date": "2017-10-26T18:25:43.511Z",
     "notes":0,
@@ -22,6 +23,7 @@ export class Items {
   constructor() {
     let items = [
       {
+        "id": 1,
         "title": "Percutaneous vertebroplasty",
         "patientName": "Burt Gerald",
         "date": "2017-10-26T18:25:43.511Z",
@@ -33,6 +35,7 @@ export class Items {
         "about": "Burt Gerald is ill ."
       },
       {
+        "id": 2,
         "title": "Interspinous process decompression",
         "patientName": "Charlie Sheen",
         "date": "2017-10-26T18:25:43.511Z",
@@ -44,6 +47,7 @@ export class Items {
         "about": "Charlie Sheen is ill."
       },
       {
+        "id": 3,
         "title": "Krukenberg procedure",
         "patientName": "Donald Trump",
         "date": "2017-10-26T18:25:43.511Z",
@@ -55,6 +59,7 @@ export class Items {
         "about": "Donald Trump is ill."
       },
       {
+        "id": 4,
         "title": "Microfracture surgery",
         "patientName": "Eva Mendez",
         "date": "2017-10-26T18:25:43.511Z",
@@ -66,6 +71,7 @@ export class Items {
         "about": "Eva is ill."
       },
       {
+        "id": 5,
         "title": "Taylor Spatial Frame",
         "patientName": "Ellie Goldbloom",
         "date": "2017-10-26T18:25:43.511Z",
@@ -77,6 +83,7 @@ export class Items {
         "about": "Ellie is ill."
       },
       {
+        "id": 6,
         "title": "Vertebral fixation",
         "patientName": "Molly Weasley",
         "date": "2017-10-26T18:25:43.511Z",
@@ -88,6 +95,7 @@ export class Items {
         "about": "Molly is ill."
       },
       {
+        "id": 7,
         "title": "Olecranon fracture",
         "patientName": "Paul Penrose",
         "date": "2017-10-26T18:25:43.511Z",
