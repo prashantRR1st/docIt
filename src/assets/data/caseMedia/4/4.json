@@ -1,0 +1,39 @@
+[{
+    "id": 1,
+    "name": "Arya",
+    "online": true,
+    "msgCount": 5,
+    "time": "11.35 AM",
+    "message": "A girl is Arya Stark of Winterfell. And I'm going home.",
+    "face": "img/arya.jpg"
+  }, {
+    "id": 2,
+    "name": "Sansa",
+    "msgCount": 1,
+    "time": "10.35 AM",
+    "message": "No please! You can't! Please!",
+    "face": "img/sansa.jpg"
+  }, {
+    "id": 3,
+    "time": "YESTERDAY",
+    "name": "Robb",
+    "online": true,
+
+    "message": "Mother..",
+    "face": "img/robb.jpg"
+  }, {
+    "id": 4,
+    "time": "YESTERDAY",
+    "name": "Bran",
+    "message": "I am the Three Eyed Raven",
+    "face": "img/bran.jpg"
+  }, {
+    "id": 5,
+    "msgCount": 2,
+    "time": "FRIDAY",
+
+    "name": "Jon",
+    "online": true,
+    "message": "I am a man of the Nightswatch",
+    "face": "img/jon.jpg"
+}]

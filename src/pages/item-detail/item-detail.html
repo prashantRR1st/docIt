@@ -8,11 +8,31 @@
 
 
 <ion-content>
-  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
+
+  <ion-tabs selectedIndex="1" tabsPlacement="top">
+    <ion-tab [root]="tab1Root" [tabTitle]="tab1Title" tabIcon="camera"></ion-tab>
+    <ion-tab [root]="tab2Root" [tabTitle]="tab2Title" tabIcon="videocam"></ion-tab>
+    <ion-tab [root]="tab3Root" [tabTitle]="tab3Title" tabIcon="mic"></ion-tab>
+    <ion-tab [root]="tab3Root" [tabTitle]="tab4Title" tabIcon="paper"></ion-tab>
+  </ion-tabs>
+
+  <ion-fab bottom right >
+    <button ion-fab>Share</button>
+    <ion-fab-list side="top">
+      <button ion-fab>Facebook</button>
+      <button ion-fab>Twitter</button>
+      <button ion-fab>Youtube</button>
+    </ion-fab-list>
+    <ion-fab-list side="left">
+      <button ion-fab>Vimeo</button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <!-- <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
   </div>
 
   <div class="item-detail" padding>
     <h2>{{item.name}}</h2>
     <p>{{item.about}}</p>
-  </div>
+  </div> -->
 </ion-content>

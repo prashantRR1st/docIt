@@ -9,3 +9,9 @@ export const MainPage = 'TabsPage';
 export const Tab1Root = 'DashboardPage';
 export const Tab2Root = 'ListMasterPage';
 export const Tab3Root = 'SettingsPage';
+
+export const Tab1Media = 'MediaGridPage';
+export const Tab2Media = 'MediaGridPage';
+export const Tab3Media = 'MediaListPage';
+export const Tab4Media = 'MediaListPage';
+

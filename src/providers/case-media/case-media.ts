@@ -1,47 +1,37 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 import {Response} from '@angular/http';
 import { HttpClient} from '@angular/common/http';
 
 import { Item } from '../../models/item';
 import { Api } from '../api/api';
 
+
 @Injectable()
-export class Items {
+export class CaseMediaProvider {
 
-  items: Item[] = [];
-  defaultItem: any = {
-    "id": 1,
-    "title": "Percutaneous vertebroplasty",
-    "patientName": "Burt Gerald",
-    "date": "2017-10-26T18:25:43.511Z",
-    "notes":0,
-    "voiceMemos":0,
-    "videos":0,
-    "photos":0,
-    "profilePic": "assets/img/speakers/bear.jpg",
-    "about": "Burt Gerald is a .",
-  };
+  caseMedia: Item[] = [];
 
-  constructor(public http:HttpClient, public api: Api) {
+  constructor(public http: HttpClient) {
+    let caseMedia: Item[];
 
-    let items: Item[];
-
-    this.getData(http).subscribe((data) => {
-      items = data;
-      for (let item of items) {
-        this.items.push(new Item(item));
-      }
-    });
-   }
+        this.getData(http).subscribe((data) => {
+          caseMedia = data;
+          for (let item of caseMedia) {
+            this.caseMedia.push(new Item(item));
+          }
+        });
+  }
 
   query(params?: any) {
     //return this.api.get('/items', params);
 
     if (!params) {
-      return this.items;
+      return this.caseMedia;
     }
 
-    return this.items.filter((item) => {
+    return this.caseMedia.filter((item) => {
       for (let key in params) {
         let field = item[key];
         if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
