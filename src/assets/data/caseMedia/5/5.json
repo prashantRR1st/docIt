@@ -1,7 +1,7 @@
 [{
     "id": 1,
     "name": "Rajeev",
-    "online": true,
+    "type": "img",
     "msgCount": 5,
     "time": "11.35 AM",
     "message": "Wow uncle, you're so cool",
@@ -9,6 +9,7 @@
   }, {
     "id": 2,
     "name": "RDX",
+    "type": "vid",
     "msgCount": 1,
     "time": "10.35 AM",
     "message": "These dolls fire, when you want them to fire.",
@@ -17,7 +18,7 @@
     "id": 3,
     "time": "YESTERDAY",
     "name": "Majnu",
-    "online": true,
+    "type": "aud",
 
     "message": "Live painting!",
     "face": "img/majnu.jpg"
@@ -25,6 +26,7 @@
     "id": 4,
     "time": "YESTERDAY",
     "name": "Sanjana",
+    "type": "note",
     "message": "Hey! We won!",
     "face": "img/sanjana.jpg"
   }, {
@@ -33,7 +35,7 @@
     "time": "FRIDAY",
 
     "name": "Lucky",
-    "online": true,
+    "type": "vid",
     "message": "Dad! He saved my life.",
     "face": "img/lucky.jpg"
 }]
