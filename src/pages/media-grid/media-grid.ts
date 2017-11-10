@@ -25,13 +25,12 @@ export class MediaGridPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.case = this.navParams.data.case;
     this.caseMedia = this.navParams.data.caseMedia;
-    console.log("Media Grid Page case Media",this.case);
-    console.log("Media Grid Page case Media",this.caseMedia);
     for (let item of this.caseMedia) {
       if (item.type == "vid") {
         this.vidMedia.push(new Item(item));
       }
     }
+    console.log("media grid page", this.vidMedia);
   }
 
   ionViewDidLoad(navCtrl: NavController, navParams: NavParams) {

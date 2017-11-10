@@ -4,38 +4,46 @@
   "type": "img",
   "msgCount": 5,
   "time": "11.35 AM",
+  "date": "2017-09-18",
   "message": "You have no idea who you're dealing with",
-  "imgUrl": "img/thor.jpg"
+  "imgUrl": "thor.jpg"
 }, {
   "id": 2,
   "name": "Tony",
   "type": "vid",
   "msgCount": 1,
   "time": "10.35 AM",
+  "date": "2017-09-18",
+  "duration": "00:07:43",
   "message": "Shakespear in the park? Doth mother know, you weareth her drapes?",
-  "imgUrl": "img/tony.jpg"
+  "imgUrl": "tony.jpg"
 }, {
   "id": 3,
   "name": "Steve",
   "type": "aud",
   "msgCount": 1,
   "time": "YESTERDAY",
+  "date": "2017-09-18",
+  "duration": "00:07:43",
   "message": "Language!",
-  "imgUrl": "img/steve.jpg"
+  "imgUrl": "steve.jpg"
 }, {
   "id": 4,
   "name": "Bruce",
   "type": "note",
   "msgCount": 1,
   "time": "YESTERDAY",
+  "date": "2017-09-18",
   "message": "I'm always angry",
-  "imgUrl": "img/bruce.jpg"
+  "imgUrl": "bruce.jpg"
 }, {
   "id": 5,
   "name": "Natasha",
   "type": "vid",
   "msgCount": 2,
   "time": "FRIDAY",
+  "date": "2017-09-18",
+  "duration": "00:07:43",
   "message": "Hey there big guy! The sun's getting real low",
-  "imgUrl": "img/natasha.jpg"
+  "imgUrl": "natasha.jpg"
 }]

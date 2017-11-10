@@ -8,15 +8,14 @@
 
 <ion-content padding>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let item of currentItems">
+  <ion-list *ngIf="noteMedia.length != 0">
+    <ion-item-sliding *ngFor="let item of noteMedia">
       <button ion-item (click)="openItem(item)">
-        <ion-thumbnail item-start>
-          <img [src]="item.profilePic" />
-        </ion-thumbnail>
-        <h3>{{item.title}}</h3>
-        <h2>{{item.patientName}}</h2>
-        <p>{{item.about}}</p>
+        <div class="line2">
+          <h2 style="float: left">{{item.name}}</h2>
+          <h3 style="float: right">{{item.date}}</h3>
+        </div>
+        <div class="line2">{{item.message}}</div>
         <ion-note item-end *ngIf="item.notes">{{item.notes}}</ion-note>
       </button>
 
@@ -28,4 +27,8 @@
     </ion-item-sliding>
   </ion-list>
 
-</ion-content>
+  <div class="noData" *ngIf="noteMedia.length == 0">
+    <ion-title>No Voice Memos Found</ion-title>
+  </div>
+
+    </ion-content>

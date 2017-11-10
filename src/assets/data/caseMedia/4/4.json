@@ -4,38 +4,46 @@
     "type": "img",
     "msgCount": 5,
     "time": "11.35 AM",
+    "date": "2017-07-15",
     "message": "A girl is Arya Stark of Winterfell. And I'm going home.",
-    "imgUrl": "img/arya.jpg"
+    "imgUrl": "arya.jpg"
   }, {
     "id": 2,
     "name": "Sansa",
     "type": "vid",
     "msgCount": 1,
     "time": "10.35 AM",
+    "date": "2017-07-15",
+    "duration": "01:03:00",
     "message": "No please! You can't! Please!",
-    "imgUrl": "img/sansa.jpg"
+    "imgUrl": "sansa.jpg"
   }, {
     "id": 3,
     "name": "Robb",
     "type": "aud",
     "msgCount": 1,
     "time": "YESTERDAY",
+    "date": "2017-07-15",
+    "duration": "01:03:00",
     "message": "Mother..",
-    "imgUrl": "img/robb.jpg"
+    "imgUrl": "robb.jpg"
   }, {
     "id": 4,
     "name": "Bran",
     "type": "note",
     "msgCount": 1,
     "time": "YESTERDAY",
+    "date": "2017-07-15",
     "message": "I am the Three Eyed Raven",
-    "imgUrl": "img/bran.jpg"
+    "imgUrl": "bran.jpg"
   }, {
     "id": 5,
     "name": "Jon",
     "type": "vid",
     "msgCount": 2,
     "time": "FRIDAY",
+    "date": "2017-07-15",
+    "duration": "01:03:00",
     "message": "I am a man of the Nightswatch",
-    "imgUrl": "img/jon.jpg"
+    "imgUrl": "jon.jpg"
 }]

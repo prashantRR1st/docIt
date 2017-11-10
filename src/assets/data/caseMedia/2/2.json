@@ -4,38 +4,46 @@
     "type": "img",
     "msgCount": 5,
     "time": "11.35 AM",
+    "date": "2017-09-21",
     "message": "Get off the road!",
-    "imgUrl": "img/frodo.jpg"
+    "imgUrl": "frodo.jpg"
   }, {
     "id": 2,
     "name": "Sam",
     "type": "vid",
     "msgCount": 1,
     "time": "10.35 AM",
+    "date": "2017-09-21",
+    "duration": "00:21:19",
     "message": "PO-TA-TOES! Boil em, mash em, stick em in a stew!",
-    "imgUrl": "img/sam.png"
+    "imgUrl": "sam.png"
   }, {
     "id": 3,
     "name": "Meriadoc",
     "type": "aud",
     "msgCount": 1,
     "time": "YESTERDAY",
+    "date": "2017-09-21",
+    "duration": "00:21:19",
     "message": "DEATH!!",
-    "imgUrl": "img/meriadoc.jpg"
+    "imgUrl": "meriadoc.jpg"
   }, {
     "id": 4,
     "name": "Perigrin",
     "type": "note",
     "msgCount": 1,
     "time": "YESTERDAY",
+    "date": "2017-09-21",
     "message": "What about second breakfast?",
-    "imgUrl": "img/perigrin.jpg"
+    "imgUrl": "perigrin.jpg"
   }, {
     "id": 5,
     "name": "Smeagol",
     "type": "vid",
     "msgCount": 2,
     "time": "FRIDAY",
+    "date": "2017-09-21",
+    "duration": "00:21:19",
     "message": "Sneaky little Hobbitses",
-    "imgUrl": "img/smeagol.jpg"
+    "imgUrl": "smeagol.jpg"
 }]

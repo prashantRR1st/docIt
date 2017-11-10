@@ -1,3 +1,21 @@
 page-note-list {
 
+  .line2 {
+    vertical-align: bottom;
+    clear: both;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+  }
+
+  .noData {
+    text-align: center;
+    line-height: 200px;
+    margin: auto;
+    margin-top: -100px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+  }
+
 }

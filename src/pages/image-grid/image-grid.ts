@@ -30,6 +30,9 @@ export class ImageGridPage {
         this.imgMedia.push(new Item(item));
       }
     }
+    console.log("case", this.case);
+    console.log("caseMedia", this.caseMedia);
+    console.log("imgMedia", this.imgMedia);
   }
 
 

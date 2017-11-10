@@ -4,38 +4,46 @@
     "type": "img",
     "msgCount": 5,
     "time": "11.35 AM",
+    "date": "2017-06-11",
     "message": "Wow uncle, you're so cool",
-    "imgUrl": "img/rajeev.jpg"
+    "imgUrl": "rajeev.jpg"
   }, {
     "id": 2,
     "name": "RDX",
     "type": "vid",
     "msgCount": 1,
     "time": "10.35 AM",
+    "date": "2017-06-11",
+    "duration": "00:19:23",
     "message": "These dolls fire, when you want them to fire.",
-    "imgUrl": "img/rdx.jpg"
+    "imgUrl": "rdx.jpg"
   }, {
     "id": 3,
     "name": "Majnu",
     "type": "aud",
     "msgCount": 1,
     "time": "YESTERDAY",
+    "date": "2017-06-11",
+    "duration": "00:19:23",
     "message": "Live painting!",
-    "imgUrl": "img/majnu.jpg"
+    "imgUrl": "majnu.jpg"
   }, {
     "id": 4,
     "name": "Sanjana",
     "type": "note",
     "msgCount": 1,
     "time": "YESTERDAY",
+    "date": "2017-06-11",
     "message": "Hey! We won!",
-    "imgUrl": "img/sanjana.jpg"
+    "imgUrl": "sanjana.jpg"
   }, {
     "id": 5,
     "name": "Lucky",
     "type": "vid",
     "msgCount": 2,
     "time": "FRIDAY",
+    "date": "2017-06-11",
+    "duration": "00:19:23",
     "message": "Dad! He saved my life.",
-    "imgUrl": "img/lucky.jpg"
+    "imgUrl": "lucky.jpg"
 }]
