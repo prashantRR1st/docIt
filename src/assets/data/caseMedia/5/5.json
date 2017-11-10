@@ -5,7 +5,7 @@
     "msgCount": 5,
     "time": "11.35 AM",
     "message": "Wow uncle, you're so cool",
-    "face": "img/rajeev.jpg"
+    "imgUrl": "img/rajeev.jpg"
   }, {
     "id": 2,
     "name": "RDX",
@@ -13,29 +13,29 @@
     "msgCount": 1,
     "time": "10.35 AM",
     "message": "These dolls fire, when you want them to fire.",
-    "face": "img/rdx.jpg"
+    "imgUrl": "img/rdx.jpg"
   }, {
     "id": 3,
-    "time": "YESTERDAY",
     "name": "Majnu",
     "type": "aud",
-
+    "msgCount": 1,
+    "time": "YESTERDAY",
     "message": "Live painting!",
-    "face": "img/majnu.jpg"
+    "imgUrl": "img/majnu.jpg"
   }, {
     "id": 4,
-    "time": "YESTERDAY",
     "name": "Sanjana",
     "type": "note",
+    "msgCount": 1,
+    "time": "YESTERDAY",
     "message": "Hey! We won!",
-    "face": "img/sanjana.jpg"
+    "imgUrl": "img/sanjana.jpg"
   }, {
     "id": 5,
-    "msgCount": 2,
-    "time": "FRIDAY",
-
     "name": "Lucky",
     "type": "vid",
+    "msgCount": 2,
+    "time": "FRIDAY",
     "message": "Dad! He saved my life.",
-    "face": "img/lucky.jpg"
+    "imgUrl": "img/lucky.jpg"
 }]

@@ -5,37 +5,37 @@
     "msgCount": 5,
     "time": "11.35 AM",
     "message": "Get off the road!",
-    "face": "img/frodo.jpg"
+    "imgUrl": "img/frodo.jpg"
   }, {
     "id": 2,
     "name": "Sam",
-    "msgCount": 1,
     "type": "vid",
+    "msgCount": 1,
     "time": "10.35 AM",
     "message": "PO-TA-TOES! Boil em, mash em, stick em in a stew!",
-    "face": "img/sam.png"
+    "imgUrl": "img/sam.png"
   }, {
     "id": 3,
-    "time": "YESTERDAY",
     "name": "Meriadoc",
     "type": "aud",
-
+    "msgCount": 1,
+    "time": "YESTERDAY",
     "message": "DEATH!!",
-    "face": "img/meriadoc.jpg"
+    "imgUrl": "img/meriadoc.jpg"
   }, {
     "id": 4,
-    "time": "YESTERDAY",
     "name": "Perigrin",
     "type": "note",
+    "msgCount": 1,
+    "time": "YESTERDAY",
     "message": "What about second breakfast?",
-    "face": "img/perigrin.jpg"
+    "imgUrl": "img/perigrin.jpg"
   }, {
     "id": 5,
-    "msgCount": 2,
-    "time": "FRIDAY",
-
     "name": "Smeagol",
     "type": "vid",
+    "msgCount": 2,
+    "time": "FRIDAY",
     "message": "Sneaky little Hobbitses",
-    "face": "img/smeagol.jpg"
+    "imgUrl": "img/smeagol.jpg"
 }]

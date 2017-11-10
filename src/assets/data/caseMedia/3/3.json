@@ -5,37 +5,37 @@
     "msgCount": 5,
     "time": "11.35 AM",
     "message": "I'm a what?",
-    "face": "img/harry.jpg"
+    "imgUrl": "img/harry.jpg"
   }, {
     "id": 2,
     "name": "Ron",
-    "msgCount": 1,
     "type": "vid",
+    "msgCount": 1,
     "time": "10.35 AM",
     "message": "Why can't it be follow the butterflies?",
-    "face": "img/ron.jpg"
+    "imgUrl": "img/ron.jpg"
   }, {
     "id": 3,
-    "time": "YESTERDAY",
     "name": "Hermione",
     "type": "aud",
-
+    "msgCount": 1,
+    "time": "YESTERDAY",
     "message": "Or worse. Expelled.",
-    "face": "img/hermione.jpg"
+    "imgUrl": "img/hermione.jpg"
   }, {
     "id": 4,
-    "time": "YESTERDAY",
     "name": "Nevile",
     "type": "note",
+    "msgCount": 1,
+    "time": "YESTERDAY",
     "message": "Why is it always me?",
-    "face": "img/nevile.jpg"
+    "imgUrl": "img/nevile.jpg"
   }, {
     "id": 5,
-    "msgCount": 2,
-    "time": "FRIDAY",
-
     "name": "Draco",
     "type": "vid",
+    "msgCount": 2,
+    "time": "FRIDAY",
     "message": "My father will hear of this!",
-    "face": "img/draco.jpg"
+    "imgUrl": "img/draco.jpg"
 }]

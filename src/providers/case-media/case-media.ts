@@ -11,17 +11,10 @@ import { Api } from '../api/api';
 @Injectable()
 export class CaseMediaProvider {
 
+  case: any;
   caseMedia: Item[] = [];
 
   constructor(public http: HttpClient) {
-    let caseMedia: Item[];
-
-        this.getData(http).subscribe((data) => {
-          caseMedia = data;
-          for (let item of caseMedia) {
-            this.caseMedia.push(new Item(item));
-          }
-        });
   }
 
   query(params?: any) {
@@ -50,8 +43,20 @@ export class CaseMediaProvider {
   delete(item: Item) {
   }
 
-  getData(http: HttpClient) {
-    return this.http.get("assets/data/cases.json")
+  setCase(item: Item) {
+    this.caseMedia = [];
+    this.case = item;
+    let caseMedia: Item[];
+    this.getData(this.case.id.toString()).subscribe((data) => {
+      caseMedia = data;
+      for (let item of caseMedia) {
+        this.caseMedia.push(new Item(item));
+      }
+    });
+  }
+
+  getData(id) {
+    return this.http.get("assets/data/caseMedia/"+id+"/"+id+".json")
         .map((res:Response) => res);
   }
 

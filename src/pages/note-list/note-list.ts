@@ -5,7 +5,7 @@ import { Item } from '../../models/item';
 import { Items } from '../../providers/providers';
 
 /**
- * Generated class for the MediaListPage page.
+ * Generated class for the NoteListPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,29 +13,29 @@ import { Items } from '../../providers/providers';
 
 @IonicPage()
 @Component({
-  selector: 'page-media-list',
-  templateUrl: 'media-list.html',
+  selector: 'page-note-list',
+  templateUrl: 'note-list.html',
 })
-export class MediaListPage {
+export class NoteListPage {
 
   currentItems: Item[];
   case: Item;
   caseMedia: Item[] = [];
-  audMedia: Item[] = [];
+  noteMedia: Item[] = [];
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public navParams: NavParams) {
     this.currentItems = this.items.query();
     this.case = this.navParams.data.case;
     this.caseMedia = this.navParams.data.caseMedia;
     for (let item of this.caseMedia) {
-      if (item.type == "aud") {
-        this.audMedia.push(new Item(item));
+      if (item.type == "note") {
+        this.noteMedia.push(new Item(item));
       }
     }
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MediaListPage');
+    console.log('ionViewDidLoad NoteListPage');
   }
 
   openSearch() {
