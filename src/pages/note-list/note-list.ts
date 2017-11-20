@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { Item } from '../../models/item';
+import { Case } from '../../models/case';
+import { CaseMedia } from '../../models/caseMedia';
 import { Items } from '../../providers/providers';
 
 /**
@@ -18,18 +20,16 @@ import { Items } from '../../providers/providers';
 })
 export class NoteListPage {
 
-  currentItems: Item[];
-  case: Item;
-  caseMedia: Item[] = [];
-  noteMedia: Item[] = [];
+  case: Case;
+  caseMedia: CaseMedia[] = [];
+  noteMedia: CaseMedia[] = [];
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public navParams: NavParams) {
-    this.currentItems = this.items.query();
     this.case = this.navParams.data.case;
     this.caseMedia = this.navParams.data.caseMedia;
     for (let item of this.caseMedia) {
       if (item.type == "note") {
-        this.noteMedia.push(new Item(item));
+        this.noteMedia.push(new CaseMedia(item));
       }
     }
   }

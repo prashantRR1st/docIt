@@ -5,14 +5,16 @@ import {Response} from '@angular/http';
 import { HttpClient} from '@angular/common/http';
 
 import { Item } from '../../models/item';
+import { Case } from '../../models/case';
+import { CaseMedia } from '../../models/caseMedia';
 import { Api } from '../api/api';
 
 
 @Injectable()
 export class CaseMediaProvider {
 
-  case: any;
-  caseMedia: Item[] = [];
+  case: Case;
+  caseMedia: CaseMedia[] = [];
 
   constructor(public http: HttpClient) {
   }
@@ -43,14 +45,14 @@ export class CaseMediaProvider {
   delete(item: Item) {
   }
 
-  setCase(item: Item) {
+  setCase(item: Case) {
     this.caseMedia = [];
     this.case = item;
-    let caseMedia: Item[];
+    let caseMedia: any;
     this.getData(this.case.id.toString()).subscribe((data) => {
       caseMedia = data;
       for (let item of caseMedia) {
-        this.caseMedia.push(new Item(item));
+        this.caseMedia.push(new CaseMedia(item));
       }
     });
   }

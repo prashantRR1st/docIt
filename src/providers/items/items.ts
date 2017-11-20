@@ -3,12 +3,13 @@ import {Response} from '@angular/http';
 import { HttpClient} from '@angular/common/http';
 
 import { Item } from '../../models/item';
+import { Case } from '../../models/case';
 import { Api } from '../api/api';
 
 @Injectable()
 export class Items {
 
-  items: Item[] = [];
+  items: Case[] = [];
   defaultItem: any = {
     "id": 1,
     "title": "Percutaneous vertebroplasty",
@@ -24,12 +25,12 @@ export class Items {
 
   constructor(public http:HttpClient, public api: Api) {
 
-    let items: Item[];
+    let items: any;
 
     this.getData(http).subscribe((data) => {
       items = data;
       for (let item of items) {
-        this.items.push(new Item(item));
+        this.items.push(new Case(item));
       }
     });
    }

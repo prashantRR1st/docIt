@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 import { Item } from '../../models/item';
+import { Case } from '../../models/case';
+import { CaseMedia } from '../../models/caseMedia';
 import { Items } from '../../providers/providers';
 
 /**
@@ -18,20 +21,26 @@ import { Items } from '../../providers/providers';
 })
 export class MediaListPage {
 
-  currentItems: Item[];
-  case: Item;
-  caseMedia: Item[] = [];
-  audMedia: Item[] = [];
+  case: Case;
+  caseMedia: CaseMedia[] = [];
+  audMedia: CaseMedia[] = [];
+  PlayPauseIcon: String = "play";
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public navParams: NavParams) {
-    this.currentItems = this.items.query();
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public navParams: NavParams, private nativeAudio: NativeAudio) {
     this.case = this.navParams.data.case;
     this.caseMedia = this.navParams.data.caseMedia;
     for (let item of this.caseMedia) {
       if (item.type == "aud") {
-        this.audMedia.push(new Item(item));
+        this.audMedia.push(new CaseMedia(item));
       }
     }
+
+    this.nativeAudio.preloadSimple('currentAudio', 'assets/data/caseMedia/'+this.case.id.toString()+'/'+'test.mp3')
+    .then(function (message) {
+            console.log("Success PreLoading!", message);
+      },  function (error) {
+            console.log("Error PreLoading", error);
+    });
   }
 
   ionViewDidLoad() {
@@ -70,6 +79,35 @@ export class MediaListPage {
     this.navCtrl.push('ItemDetailPage', {
       item: item
     });
+  }
+
+  playOrPause(fileName: String) {
+    if(this.PlayPauseIcon == 'play'){
+      this.nativeAudio.play('currentAudio')
+      .then(function (message) {
+              console.log("Success Playing!", message);
+        },  function (error) {
+              console.log("Error Playing", error);
+      });
+      this.PlayPauseIcon = "pause";
+    }
+    else{
+      this.nativeAudio.stop('currentAudio')
+      .then(function (message) {
+              console.log("Success Stopping!", message);
+        },  function (error) {
+              console.log("Error Stopping", error);
+      });
+      this.nativeAudio.unload('currentAudio')
+      .then(function (message) {
+              console.log("Success Unloading!", message);
+        },  function (error) {
+              console.log("Error Unloading", error);
+      });
+      this.PlayPauseIcon = "play";
+    }
+
+
   }
 
 }

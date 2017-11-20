@@ -9,14 +9,18 @@
 
   <ion-list *ngIf="audMedia.length != 0">
     <ion-item-sliding *ngFor="let item of audMedia">
-      <button ion-item (click)="openItem(item)">
-        <h2>{{item.name}}</h2>
+      <button ion-item (click)="playOrPause(item.fileName)">
+        <h2><strong>{{item.name}}</strong></h2>
         <div class="line2">
           <h3 style="float: right">{{item.duration}}</h3>
           <h4 style="float: left">{{item.date}}</h4>
         </div>
         <ion-note item-end *ngIf="item.notes">{{item.notes}}</ion-note>
+        <button ion-button icon-only (click)="playOrPause(item.fileName)">
+          <ion-icon [name]="PlayPauseIcon" ></ion-icon>
+        </button>
       </button>
+
 
       <ion-item-options>
         <button ion-button color="danger" (click)="deleteItem(item)">

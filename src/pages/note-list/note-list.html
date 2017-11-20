@@ -12,12 +12,12 @@
     <ion-item-sliding *ngFor="let item of noteMedia">
       <button ion-item (click)="openItem(item)">
         <div class="line2">
-          <h2 style="float: left">{{item.name}}</h2>
+          <h2 style="float: left"><strong>{{item.name}}</strong></h2>
           <h3 style="float: right">{{item.date}}</h3>
         </div>
         <div class="line2">{{item.message}}</div>
-        <ion-note item-end *ngIf="item.notes">{{item.notes}}</ion-note>
       </button>
+      <ion-note item-end >{{item.message}}</ion-note>
 
       <ion-item-options>
         <button ion-button color="danger" (click)="deleteItem(item)">

@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Item } from '../../models/item';
+import { Case } from '../../models/case';
+import { CaseMedia } from '../../models/caseMedia';
 import { Items } from '../../providers/providers';
 import { CaseMediaProvider } from '../../providers/providers';
 
@@ -30,8 +32,8 @@ export class ItemDetailPage {
 
   tabParams: any;
 
-  case: Item;
-  caseMedia: Item[] = [];
+  case: Case;
+  caseMedia: CaseMedia[] = [];
 
 
   constructor(public navParams: NavParams, caseMediaProvider: CaseMediaProvider, items: Items, public navCtrl: NavController) {
