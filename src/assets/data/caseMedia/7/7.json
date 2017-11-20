@@ -5,6 +5,7 @@
   "msgCount": 5,
   "time": "11.35 AM",
   "date": "2017-09-18",
+  "fileName": "test.jpg",
   "message": "You have no idea who you're dealing with",
   "imgUrl": "thor.jpg"
 }, {
@@ -14,6 +15,7 @@
   "msgCount": 1,
   "time": "10.35 AM",
   "date": "2017-09-18",
+  "fileName": "test.mp4",
   "duration": "00:07:43",
   "message": "Shakespear in the park? Doth mother know, you weareth her drapes?",
   "imgUrl": "tony.jpg"
@@ -24,6 +26,7 @@
   "msgCount": 1,
   "time": "YESTERDAY",
   "date": "2017-09-18",
+  "fileName": "test.mp3",
   "duration": "00:07:43",
   "message": "Language!",
   "imgUrl": "steve.jpg"
@@ -34,6 +37,7 @@
   "msgCount": 1,
   "time": "YESTERDAY",
   "date": "2017-09-18",
+  "fileName": "test.txt",
   "message": "I'm always angry",
   "imgUrl": "bruce.jpg"
 }, {
@@ -43,6 +47,7 @@
   "msgCount": 2,
   "time": "FRIDAY",
   "date": "2017-09-18",
+  "fileName": "test.mp4",
   "duration": "00:07:43",
   "message": "Hey there big guy! The sun's getting real low",
   "imgUrl": "natasha.jpg"

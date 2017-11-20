@@ -5,6 +5,7 @@
     "msgCount": 5,
     "time": "11.35 AM",
     "date": "2016-08-12",
+    "fileName": "test.jpg",
     "message": "I'm a what?",
     "imgUrl": "harry.jpg"
   }, {
@@ -14,6 +15,7 @@
     "msgCount": 1,
     "time": "10.35 AM",
     "date": "2016-08-12",
+    "fileName": "test.mp4",
     "duration": "00:01:02",
     "message": "Why can't it be follow the butterflies?",
     "imgUrl": "ron.jpg"
@@ -24,6 +26,7 @@
     "msgCount": 1,
     "time": "YESTERDAY",
     "date": "2016-08-12",
+    "fileName": "test.mp3",
     "duration": "00:01:02",
     "message": "Or worse. Expelled.",
     "imgUrl": "hermione.jpg"
@@ -34,6 +37,7 @@
     "msgCount": 1,
     "time": "YESTERDAY",
     "date": "2016-08-12",
+    "fileName": "test.txt",
     "message": "Why is it always me?",
     "imgUrl": "nevile.jpg"
   }, {
@@ -43,6 +47,7 @@
     "msgCount": 2,
     "time": "FRIDAY",
     "date": "2016-08-12",
+    "fileName": "test.mp4",
     "duration": "00:01:02",
     "message": "My father will hear of this!",
     "imgUrl": "draco.jpg"

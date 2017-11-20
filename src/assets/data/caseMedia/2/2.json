@@ -5,6 +5,7 @@
     "msgCount": 5,
     "time": "11.35 AM",
     "date": "2017-09-21",
+    "fileName": "test.jpg",
     "message": "Get off the road!",
     "imgUrl": "frodo.jpg"
   }, {
@@ -14,6 +15,7 @@
     "msgCount": 1,
     "time": "10.35 AM",
     "date": "2017-09-21",
+    "fileName": "test.mp4",
     "duration": "00:21:19",
     "message": "PO-TA-TOES! Boil em, mash em, stick em in a stew!",
     "imgUrl": "sam.png"
@@ -24,6 +26,7 @@
     "msgCount": 1,
     "time": "YESTERDAY",
     "date": "2017-09-21",
+    "fileName": "test.mp3",
     "duration": "00:21:19",
     "message": "DEATH!!",
     "imgUrl": "meriadoc.jpg"
@@ -34,6 +37,7 @@
     "msgCount": 1,
     "time": "YESTERDAY",
     "date": "2017-09-21",
+    "fileName": "test.txt",
     "message": "What about second breakfast?",
     "imgUrl": "perigrin.jpg"
   }, {
@@ -43,6 +47,7 @@
     "msgCount": 2,
     "time": "FRIDAY",
     "date": "2017-09-21",
+    "fileName": "test.mp4",
     "duration": "00:21:19",
     "message": "Sneaky little Hobbitses",
     "imgUrl": "smeagol.jpg"

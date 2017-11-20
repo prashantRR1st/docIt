@@ -5,6 +5,7 @@
     "msgCount": 5,
     "time": "11.35 AM",
     "date": "2017-07-15",
+    "fileName": "test.jpg",
     "message": "A girl is Arya Stark of Winterfell. And I'm going home.",
     "imgUrl": "arya.jpg"
   }, {
@@ -14,6 +15,7 @@
     "msgCount": 1,
     "time": "10.35 AM",
     "date": "2017-07-15",
+    "fileName": "test.mp4",
     "duration": "01:03:00",
     "message": "No please! You can't! Please!",
     "imgUrl": "sansa.jpg"
@@ -24,6 +26,7 @@
     "msgCount": 1,
     "time": "YESTERDAY",
     "date": "2017-07-15",
+    "fileName": "test.mp3",
     "duration": "01:03:00",
     "message": "Mother..",
     "imgUrl": "robb.jpg"
@@ -34,6 +37,7 @@
     "msgCount": 1,
     "time": "YESTERDAY",
     "date": "2017-07-15",
+    "fileName": "test.txt",
     "message": "I am the Three Eyed Raven",
     "imgUrl": "bran.jpg"
   }, {
@@ -43,6 +47,7 @@
     "msgCount": 2,
     "time": "FRIDAY",
     "date": "2017-07-15",
+    "fileName": "test.mp4",
     "duration": "01:03:00",
     "message": "I am a man of the Nightswatch",
     "imgUrl": "jon.jpg"

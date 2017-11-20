@@ -5,6 +5,7 @@
     "msgCount": 5,
     "time": "11.35 AM",
     "date": "2017-10-18",
+    "fileName": "test.jpg",
     "duration": "00:03:23",
     "message": "So, you think darkness is your ally? You merely adopted the dark. I was born in it. Moulded by it. I didnt see the light till I was a man and by that time it was BLINDING",
     "imgUrl": "bane.jpg"
@@ -15,6 +16,7 @@
     "msgCount": 1,
     "time": "10.35 AM",
     "date": "2017-10-18",
+    "fileName": "test.mp4",
     "duration": "00:03:23",
     "message": "A wizard is neither early nor late. He arrives precisely when he means to.",
     "imgUrl": "gandalf.jpg"
@@ -25,6 +27,7 @@
     "type": "aud",
     "msgCount": 1,
     "date": "2017-10-18",
+    "fileName": "test.mp3",
     "duration": "00:03:23",
     "message": "Do it. Embrace the dark side.",
     "imgUrl": "palpatine.jpg"
@@ -35,6 +38,7 @@
     "type": "note",
     "msgCount": 1,
     "date": "2017-10-18",
+    "fileName": "test.txt",
     "message": "Ronald Weasly! How dare you steal that car!",
     "imgUrl": "molly.jpg"
   }, {
@@ -44,6 +48,7 @@
     "type": "vid",
     "msgCount": 2,
     "date": "2017-10-18",
+    "fileName": "test.mp4",
     "duration": "00:03:23",
     "message": "I have been on trial for being a dwarf since the day I was born. I didnt do it. I did not kill Jeoffry, but I wish that I had. Watching your viscious bastard die, gave me more pleasure than a thousand lying whores.I wish I was the monster you all think I am. I wish I had enough poison for the whole pack of you. I would gladly give my life to watch you all swallow it.",
     "imgUrl": "tyrion.jpg"
