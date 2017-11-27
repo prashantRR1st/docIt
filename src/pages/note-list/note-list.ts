@@ -6,6 +6,8 @@ import { Case } from '../../models/case';
 import { CaseMedia } from '../../models/caseMedia';
 import { Items } from '../../providers/providers';
 
+import { NotePage } from '../note/note';
+
 /**
  * Generated class for the NoteListPage page.
  *
@@ -66,9 +68,10 @@ export class NoteListPage {
   /**
    * Navigate to the detail page for this item.
    */
-  openItem(item: Item) {
-    this.navCtrl.push('ItemDetailPage', {
-      item: item
+  openItem(caseMedia: CaseMedia) {
+    this.navCtrl.popToRoot();
+    this.navCtrl.push('NotePage', {
+      caseMedia: caseMedia
     });
   }
 
