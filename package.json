@@ -37,6 +37,7 @@
     "cordova-plugin-ionic-webview": "^1.1.16",
     "cordova-plugin-nativeaudio": "^3.0.9",
     "cordova-plugin-splashscreen": "^4.1.0",
+    "cordova-plugin-statusbar": "^2.3.0",
     "cordova-plugin-whitelist": "^1.3.3",
     "ionic-angular": "3.7.1",
     "ionic-plugin-keyboard": "^2.2.1",
@@ -59,7 +60,8 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-whitelist": {},
       "ionic-plugin-keyboard": {},
-      "com-badrit-base64": {}
+      "com-badrit-base64": {},
+      "cordova-plugin-statusbar": {}
     },
     "platforms": [
       "android",

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 
-import { Item } from '../../models/item';
+import { Case } from '../../models/case';
 import { Items } from '../../providers/providers';
 
 @IonicPage()
@@ -10,9 +10,10 @@ import { Items } from '../../providers/providers';
   templateUrl: 'list-master.html'
 })
 export class ListMasterPage {
-  currentItems: Item[];
+  currentItems: Case[];
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public items: Items,
+    public modalCtrl: ModalController, public navParams: NavParams) {
     this.currentItems = this.items.query();
   }
 
@@ -31,7 +32,7 @@ export class ListMasterPage {
    * modal and then adds the new item to our data source if the user created one.
    */
   addItem() {
-    let addModal = this.modalCtrl.create('ItemCreatePage');
+    let addModal = this.modalCtrl.create('ItemCreatePage', {mode: 'case'});
     addModal.onDidDismiss(item => {
       if (item) {
         this.items.add(item);
@@ -50,7 +51,7 @@ export class ListMasterPage {
   /**
    * Navigate to the detail page for this item.
    */
-  openItem(item: Item) {
+  openItem(item: Case) {
     this.navCtrl.push('ItemDetailPage', {
       item: item
     });

@@ -4,6 +4,7 @@ export class Case {
   title: string;
   patientName: string;
   date: string;
+  time: string;
   notes: number;
   voiceMemos: number;
   videos: number;

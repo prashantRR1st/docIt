@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Item } from '../../models/item';
@@ -36,7 +36,8 @@ export class ItemDetailPage {
   caseMedia: CaseMedia[] = [];
 
 
-  constructor(public navParams: NavParams, caseMediaProvider: CaseMediaProvider, items: Items, public navCtrl: NavController) {
+  constructor(public navParams: NavParams, caseMediaProvider: CaseMediaProvider,
+    public items: Items, public navCtrl: NavController, public modalCtrl: ModalController) {
     this.case = navParams.get('item') || items.defaultItem;
     caseMediaProvider.setCase(this.case);
 
@@ -59,6 +60,16 @@ export class ItemDetailPage {
 
 
     console.log("this.caseMedia", this.caseMedia);
+  }
+
+  addItem(mediaType) {
+    let addModal = this.modalCtrl.create('ItemCreatePage', {mode: mediaType});
+    addModal.onDidDismiss(item => {
+      if (item) {
+        this.items.add(item);
+      }
+    })
+    addModal.present();
   }
 
   updateTabParams() {

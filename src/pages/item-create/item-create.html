@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'ITEM_CREATE_TITLE' | translate }}</ion-title>
+    <ion-title>New {{ itemName }}</ion-title>
     <ion-buttons start>
       <button ion-button (click)="cancel()">
         <span color="primary" showWhen="ios">
@@ -13,7 +13,7 @@
     <ion-buttons end>
       <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
         <span color="primary" showWhen="ios">
-          {{ 'DONE_BUTTON' | translate }}
+          Continue
         </span>
         <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
       </button>
@@ -36,12 +36,31 @@
       <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
     </div>
     <ion-list>
-      <ion-item>
+
+      <ion-item *ngIf="mode == 'case'">
+        <ion-input type="text" placeholder="Case Title" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="mode == 'case'">
+        <ion-input type="text" placeholder="Patient Name" formControlName="patientName"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="mode != 'case'">
         <ion-input type="text" placeholder="{{ 'ITEM_NAME_PLACEHOLDER' | translate }}" formControlName="name"></ion-input>
       </ion-item>
+
+      <ion-item>
+        <ion-datetime displayFormat="DDD, MMM D YYYY" placeholder="Date" formControlName="date"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-datetime displayFormat="hh:mm A" placeholder="Time" formControlName="time"></ion-datetime>
+      </ion-item>
+
       <ion-item>
         <ion-input type="text" placeholder="{{ 'ITEM_ABOUT_PLACEHOLDER' | translate }}" formControlName="about"></ion-input>
       </ion-item>
+
     </ion-list>
   </form>
 </ion-content>

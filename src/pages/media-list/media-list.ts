@@ -85,14 +85,10 @@ export class MediaListPage {
     });
   }
 
-  playOrPause(audioPath: string) {
+  playOrPause(audioName: string) {
+    let audioPath: string = 'assets/data/caseMedia/'+this.case.id.toString()+'/'+audioName;
+    this.preloadAudio(audioPath);
     if(this.PlayPauseIcon == 'play'){
-      this.nativeAudio.preloadComplex('currentAudio', audioPath, 1, 1, 0)
-      .then(function (message) {
-              console.log("Success Complex Preloading!", message);
-        },  function (error) {
-              console.log("Error Complex Preloading", error);
-      });
       this.nativeAudio.play('currentAudio')
       .then(function (message) {
               console.log("Success Playing!", message);
@@ -101,7 +97,7 @@ export class MediaListPage {
       });
       this.PlayPauseIcon = "pause";
     }
-    else{
+    else if (this.PlayPauseIcon == 'pause'){
       this.nativeAudio.stop('currentAudio')
       .then(function (message) {
               console.log("Success Stopping!", message);
@@ -116,6 +112,18 @@ export class MediaListPage {
       });
       this.PlayPauseIcon = "play";
     }
+    else {
+      return false;
+    }
+  }
+
+  preloadAudio(audioPath: string) {
+    this.nativeAudio.preloadComplex('currentAudio', audioPath, 1, 1, 0)
+    .then(function (message) {
+            console.log("Success Complex Preloading!", message);
+      },  function (error) {
+            console.log("Error Complex Preloading", error);
+    });
   }
 
   GoogleSpeechAPIRequest () {
@@ -124,7 +132,7 @@ export class MediaListPage {
     let audioPath: string = '../../assets/data/caseMedia/1/test.wav';
 
     let audioContentB64: any = this.getBase64encoding(audioPath);
-
+    console.log(audioContentB64);
 
     let apiKey: String = "AIzaSyAU8ijQDKJHKGrR0nyaETY_F7a3HZ6jpS8";
     let config: any = {encoding:"LINEAR16",

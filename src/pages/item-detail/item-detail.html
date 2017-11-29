@@ -19,10 +19,10 @@
   <ion-fab bottom right >
     <button ion-fab><ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="top">
-      <button ion-fab><ion-icon name="paper"></ion-icon></button>
-      <button ion-fab><ion-icon name="mic"></ion-icon></button>
-      <button ion-fab><ion-icon name="videocam"></ion-icon></button>
-      <button ion-fab><ion-icon name="camera"></ion-icon></button>
+      <button ion-fab (click)="addItem('note')"><ion-icon name="paper"></ion-icon></button>
+      <button ion-fab (click)="addItem('aud')"><ion-icon name="mic"></ion-icon></button>
+      <button ion-fab (click)="addItem('vid')"><ion-icon name="videocam"></ion-icon></button>
+      <button ion-fab (click)="addItem('img')"><ion-icon name="camera"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 
