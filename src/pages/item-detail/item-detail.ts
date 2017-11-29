@@ -43,23 +43,6 @@ export class ItemDetailPage {
 
     this.caseMedia = caseMediaProvider.query();
     this.updateTabParams();
-
-    // for (let item of caseMedia) {
-    //   console.log("Item Detail Page items of this.caseMedia", item);
-    //   switch (item.type) {
-    //     case 'img':
-    //       this.caseMediaImg.push(new Item(item));
-    //     case 'vid':
-    //       this.caseMediaVid.push(new Item(item));
-    //     case 'aud':
-    //       this.caseMediaAud.push(new Item(item));
-    //     case 'note':
-    //       this.caseMediaNote.push(new Item(item));
-    //   }
-    // }
-
-
-    console.log("this.caseMedia", this.caseMedia);
   }
 
   addItem(mediaType) {

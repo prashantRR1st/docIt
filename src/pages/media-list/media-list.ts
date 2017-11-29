@@ -38,13 +38,6 @@ export class MediaListPage {
         this.audMedia.push(new CaseMedia(item));
       }
     }
-
-    // this.nativeAudio.preloadSimple('currentAudio', 'assets/data/caseMedia/'+this.case.id.toString()+'/'+'test.mp3')
-    // .then(function (message) {
-    //         console.log("Success PreLoading!", message);
-    //   },  function (error) {
-    //         console.log("Error PreLoading", error);
-    // });
   }
 
   ionViewDidLoad() {
@@ -87,8 +80,9 @@ export class MediaListPage {
 
   playOrPause(audioName: string) {
     let audioPath: string = 'assets/data/caseMedia/'+this.case.id.toString()+'/'+audioName;
-    this.preloadAudio(audioPath);
+
     if(this.PlayPauseIcon == 'play'){
+      this.preloadAudio(audioPath);
       this.nativeAudio.play('currentAudio')
       .then(function (message) {
               console.log("Success Playing!", message);
@@ -97,6 +91,7 @@ export class MediaListPage {
       });
       this.PlayPauseIcon = "pause";
     }
+
     else if (this.PlayPauseIcon == 'pause'){
       this.nativeAudio.stop('currentAudio')
       .then(function (message) {
@@ -112,8 +107,9 @@ export class MediaListPage {
       });
       this.PlayPauseIcon = "play";
     }
+
     else {
-      return false;
+      console.log("Audio Control Error!");
     }
   }
 
@@ -134,19 +130,20 @@ export class MediaListPage {
     let audioContentB64: any = this.getBase64encoding(audioPath);
     console.log(audioContentB64);
 
-    let apiKey: String = "AIzaSyAU8ijQDKJHKGrR0nyaETY_F7a3HZ6jpS8";
-    let config: any = {encoding:"LINEAR16",
-    sampleRateHertz: 8000,
-    languageCode: "en-US",
-    enableWordTimeOffsets: false};
-    let audio: any =  { content: audioContentB64
-                        //uri:"gs://cloud-samples-tests/speech/brooklyn.flac"
-                      };
     let requestURL: String = 'https://speech.googleapis.com/v1/speech:recognize';
+    let apiKey: String = "AIzaSyAU8ijQDKJHKGrR0nyaETY_F7a3HZ6jpS8";
+
+    //Audio Specifications
+    let config: any = { encoding:"LINEAR16",
+                        sampleRateHertz: 8000,
+                        languageCode: "en-US",
+                        enableWordTimeOffsets: false };
+
+    let audio: any =  { content: audioContentB64 };
+
     let params: any =  {  config: config,
                           audio: audio,  };
 
-    // convert the javascript object to a Json string
     let paramsjasonString: any = JSON.stringify(params);
     console.log("paramsjasonString = " + paramsjasonString);
 
