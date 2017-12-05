@@ -29,7 +29,7 @@ export class MediaListPage {
   PlayPauseIcon: String = "play";
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
-               public navParams: NavParams, private nativeAudio: NativeAudio, private base64: Base64,
+               public navParams: NavParams, public nativeAudio: NativeAudio, public base64: Base64,
               public speechApi: SpeechApi) {
     this.case = this.navParams.data.case;
     this.caseMedia = this.navParams.data.caseMedia;
@@ -82,44 +82,55 @@ export class MediaListPage {
     // let audio = new Audio('assets/data/caseMedia/'+this.case.id.toString()+'/'+audioName);
     // audio.play();
     let audioPath: string = 'assets/data/caseMedia/'+this.case.id.toString()+'/'+audioName;
-    this.preloadAudio(audioPath);
+    let audioId: string = 'currentAudio';
     if(this.PlayPauseIcon == 'play'){
-      this.nativeAudio.play('currentAudio')
-      .then(function (message) {
-              console.log("Success Playing!", message);
-        },  function (error) {
-              console.log("Error Playing", error);
-      });
+      this.preloadAudio(audioPath, audioId, this.playAudio, this.nativeAudio);
       this.PlayPauseIcon = "pause";
     }
-
     else if (this.PlayPauseIcon == 'pause'){
-      this.nativeAudio.stop('currentAudio')
-      .then(function (message) {
-              console.log("Success Stopping!", message);
-        },  function (error) {
-              console.log("Error Stopping", error);
-      });
-      this.nativeAudio.unload('currentAudio')
-      .then(function (message) {
-              console.log("Success Unloading!", message);
-        },  function (error) {
-              console.log("Error Unloading", error);
-      });
+      this.stopAudio(audioId, this.unloadAudio, this.nativeAudio);
       this.PlayPauseIcon = "play";
     }
-
     else {
       console.log("Audio Control Error!");
     }
   }
 
-  preloadAudio(audioPath: string) {
-    this.nativeAudio.preloadComplex('currentAudio', audioPath, 1, 1, 0)
+  preloadAudio(audioPath: string, audioId: string, playAudioFn, nativeAudio: NativeAudio) {
+    this.nativeAudio.preloadComplex(audioId, audioPath, 1, 1, 0)
     .then(function (message) {
             console.log("Success Complex Preloading!", message);
+            playAudioFn(audioId, nativeAudio);
       },  function (error) {
             console.log("Error Complex Preloading", error);
+    });
+  }
+
+  playAudio(audioId, nativeAudio: NativeAudio) {
+    nativeAudio.play(audioId)
+    .then(function (message) {
+            console.log("Success Playing!", message);
+      },  function (error) {
+            console.log("Error Playing", error);
+    });
+  }
+
+  stopAudio(audioId, unloadAudioFn, nativeAudio: NativeAudio) {
+    nativeAudio.stop(audioId)
+    .then(function (message) {
+            console.log("Success Stopping!", message);
+            unloadAudioFn(audioId, nativeAudio);
+      },  function (error) {
+            console.log("Error Stopping", error);
+    });
+  }
+
+  unloadAudio(audioId, nativeAudio: NativeAudio) {
+    nativeAudio.unload(audioId)
+    .then(function (message) {
+            console.log("Success Unloading!", message);
+      },  function (error) {
+            console.log("Error Unloading", error);
     });
   }
 
