@@ -7,6 +7,7 @@ import { Item } from '../../models/item';
 import { Case } from '../../models/case';
 import { CaseMedia } from '../../models/caseMedia';
 import { Items } from '../../providers/providers';
+import { SpeechApi } from '../../providers/api/api';
 
 /**
  * Generated class for the MediaListPage page.
@@ -26,11 +27,10 @@ export class MediaListPage {
   caseMedia: CaseMedia[] = [];
   audMedia: CaseMedia[] = [];
   PlayPauseIcon: String = "play";
-  user: any;
-  google_api_key: any = "AIzaSyAU8ijQDKJHKGrR0nyaETY_F7a3HZ6jpS8";
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
-               public navParams: NavParams, private nativeAudio: NativeAudio, private base64: Base64) {
+               public navParams: NavParams, private nativeAudio: NativeAudio, private base64: Base64,
+              public speechApi: SpeechApi) {
     this.case = this.navParams.data.case;
     this.caseMedia = this.navParams.data.caseMedia;
     for (let item of this.caseMedia) {
@@ -56,7 +56,7 @@ export class MediaListPage {
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
       if (item) {
-        this.items.add(item);
+        //this.items.add(item);
       }
     })
     addModal.present();
@@ -79,10 +79,11 @@ export class MediaListPage {
   }
 
   playOrPause(audioName: string) {
+    // let audio = new Audio('assets/data/caseMedia/'+this.case.id.toString()+'/'+audioName);
+    // audio.play();
     let audioPath: string = 'assets/data/caseMedia/'+this.case.id.toString()+'/'+audioName;
-
+    this.preloadAudio(audioPath);
     if(this.PlayPauseIcon == 'play'){
-      this.preloadAudio(audioPath);
       this.nativeAudio.play('currentAudio')
       .then(function (message) {
               console.log("Success Playing!", message);
@@ -122,49 +123,40 @@ export class MediaListPage {
     });
   }
 
-  GoogleSpeechAPIRequest () {
-    var xhr = new XMLHttpRequest();
-
+  GoogleSpeechAPIRequest (duration) {
     let audioPath: string = '../../assets/data/caseMedia/1/test.wav';
 
     let audioContentB64: any = this.getBase64encoding(audioPath);
-    console.log(audioContentB64);
-
-    let requestURL: String = 'https://speech.googleapis.com/v1/speech:recognize';
-    let apiKey: String = "AIzaSyAU8ijQDKJHKGrR0nyaETY_F7a3HZ6jpS8";
 
     //Audio Specifications
-    let config: any = { encoding:"LINEAR16",
-                        sampleRateHertz: 8000,
+    let config: any = { encoding:"FLAC", //May be optional
+                        sampleRateHertz: 16000, //May be optional
                         languageCode: "en-US",
-                        enableWordTimeOffsets: false };
+                        enableWordTimeOffsets: true };
 
-    let audio: any =  { content: audioContentB64 };
+    let audio: any =  { "uri":"gs://cloud-samples-tests/speech/brooklyn.flac" }//content: audioContentB64 };
 
     let params: any =  {  config: config,
                           audio: audio,  };
 
-    let paramsjasonString: any = JSON.stringify(params);
-    console.log("paramsjasonString = " + paramsjasonString);
+    let paramsJSONstring: any = JSON.stringify(params);
+    console.log("paramsjasonString = " + paramsJSONstring);
 
-    //CORS POST Request - Short Running Recognize
-    xhr.open('POST', requestURL + '?key='+apiKey, true );
+    if (duration <= 30) {
+      this.speechApi.postShort(paramsJSONstring, this.shortRecogCallback);
+    } else {
+      this.speechApi.postLong(paramsJSONstring, this.longRecogCallback)
+    }
+  }
 
-    // Specify the http content-type as json
-    xhr.setRequestHeader('Content-Type', 'application/json');
+  shortRecogCallback(response) {
+    console.log("ABfunction",response);
+    let transcript: any  = response.transcript;
+    let words: any = response.words;
+  }
 
-    // Response handlers
-    xhr.onload = function() {
-      var responseText = xhr.responseText;
-      console.log(responseText);
-      // process the response.
-    };
-
-    xhr.onerror = function() {
-      console.log('There was an error!');
-    };
-
-    xhr.send(paramsjasonString);
+  longRecogCallback(response) {
+    console.log("ABfunction",response);
   }
 
   getBase64encoding (audioPath: string) {
