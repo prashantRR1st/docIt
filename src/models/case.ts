@@ -20,4 +20,8 @@ export class Case {
     }
   }
 
+  add(item: Case) {
+
+  }
+
   }

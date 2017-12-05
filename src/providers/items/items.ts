@@ -4,7 +4,7 @@ import { HttpClient} from '@angular/common/http';
 
 import { Item } from '../../models/item';
 import { Case } from '../../models/case';
-import { Api } from '../api/api';
+import { SpeechApi } from '../api/api';
 
 @Injectable()
 export class Items {
@@ -23,7 +23,7 @@ export class Items {
     "about": "Burt Gerald is a .",
   };
 
-  constructor(public http:HttpClient, public api: Api) {
+  constructor(public http:HttpClient, public api: SpeechApi) {
 
     let items: any;
 
@@ -55,7 +55,21 @@ export class Items {
     });
   }
 
-  add(item: Item) {
+  add(item, currLength: number) {
+    let newItem: any = {
+      "id": currLength+1,
+      "title": item.name,
+      "patientName": item.patientName,
+      "date": item.date,
+      "notes":0,
+      "voiceMemos":0,
+      "videos":0,
+      "photos":0,
+      "profilePic": item.profilePic,
+      "about": item.about,
+    };
+
+    this.postData(this.http, newItem);
   }
 
   delete(item: Item) {
@@ -64,6 +78,13 @@ export class Items {
   getData(http: HttpClient) {
     return this.http.get("assets/data/cases.json")
         .map((res:Response) => res);
+  }
+
+  postData(http: HttpClient, item) {
+    // return this.http.post("assets/data/cases.json", item)
+    //     .subscribe(data => {
+    //       console.log(data);
+    //     })
   }
 
 }

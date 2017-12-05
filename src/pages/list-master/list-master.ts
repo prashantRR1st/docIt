@@ -35,7 +35,8 @@ export class ListMasterPage {
     let addModal = this.modalCtrl.create('ItemCreatePage', {mode: 'case'});
     addModal.onDidDismiss(item => {
       if (item) {
-        this.items.add(item);
+        this.items.add(item, this.currentItems.length); //Add item to Local JSON
+        //this.currentItems = this.items.query();  //Query JSON again
       }
     })
     addModal.present();
