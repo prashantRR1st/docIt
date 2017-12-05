@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
+import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-native/media-capture';
 
 import { Item } from '../../models/item';
 import { Case } from '../../models/case';
@@ -36,8 +37,9 @@ export class ItemDetailPage {
   caseMedia: CaseMedia[] = [];
 
 
-  constructor(public navParams: NavParams, caseMediaProvider: CaseMediaProvider,
-    public items: Items, public navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor(public navParams: NavParams, public caseMediaProvider: CaseMediaProvider,
+    public items: Items, public navCtrl: NavController, public modalCtrl: ModalController,
+    public mediaCapture: MediaCapture) {
     this.case = navParams.get('item') || items.defaultItem;
     caseMediaProvider.setCase(this.case);
 
@@ -49,7 +51,21 @@ export class ItemDetailPage {
     let addModal = this.modalCtrl.create('ItemCreatePage', {mode: mediaType});
     addModal.onDidDismiss(item => {
       if (item) {
-        this.items.add(item);
+        console.log("media Type: ",mediaType);
+        //1. Construct JSON Details of Object
+        //OR Just send item to Cse Media Provider and construct JSON details there
+
+        //2. Call Media Recorder
+        //3. Record Media
+        //4. Send Media (and JSON Details) to Case Media Provider
+        if (mediaType == "note") {
+            console.log("WTF");
+            this.caseMediaProvider.add(item, mediaType, this.caseMedia.length, this.takeNote());
+        } else if (mediaType != "note") {
+            console.log("reached");
+            this.caseMediaProvider.add(item, mediaType, this.caseMedia.length, undefined ,this.record(mediaType));
+        }
+        //this.items.add(item);
       }
     })
     addModal.present();
@@ -60,6 +76,66 @@ export class ItemDetailPage {
       case: this.case,
       caseMedia: this.caseMedia,
     };
+  }
+
+  record(mediaType) {
+    switch(mediaType) {
+      case 'img': {
+        return this.captureImage();
+      }
+      case 'vid': {
+        return this.recordVideo();
+      }
+      case 'aud': {
+        return this.recordAudio();
+      }
+    }
+  }
+
+  captureImage() {
+    let imageData: MediaFile;
+    let options: CaptureImageOptions = { limit: 1 };
+    this.mediaCapture.captureImage(options)
+      .then(
+        (data: MediaFile[]) => {
+          console.log(data);
+          imageData = data[0];
+        },
+        (err: CaptureError) => console.error(err)
+      );
+    return imageData;
+  }
+
+  recordVideo() {
+    let videoData: MediaFile;
+    let options: CaptureVideoOptions = { limit: 1 };
+    this.mediaCapture.captureVideo(options)
+    .then(
+      (data: MediaFile[]) => (data: MediaFile[]) => {
+        console.log(data);
+        videoData = data[0];
+      },
+      (err: CaptureError) => console.error(err)
+    );
+    return videoData;
+  }
+
+  recordAudio() {
+    let audioData: MediaFile;
+    let options: CaptureAudioOptions = { limit: 1 };
+    this.mediaCapture.captureAudio(options)
+    .then(
+      (data: MediaFile[]) => (data: MediaFile[]) => {
+        console.log(data);
+        audioData = data[0];
+      },
+      (err: CaptureError) => console.error(err)
+    );
+    return audioData;
+  }
+
+  takeNote() {
+
   }
 
 }
