@@ -52,7 +52,7 @@ export class NoteListPage {
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
       if (item) {
-        this.items.add(item);
+        //this.items.add(item);
       }
     })
     addModal.present();
@@ -69,7 +69,6 @@ export class NoteListPage {
    * Navigate to the detail page for this item.
    */
   openItem(caseMedia: CaseMedia) {
-    this.navCtrl.popToRoot();
     this.navCtrl.push('NotePage', {
       caseMedia: caseMedia
     });
