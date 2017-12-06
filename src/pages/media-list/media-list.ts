@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { Base64 } from '@ionic-native/base64';
+import { File } from '@ionic-native/file';
 
 import { Item } from '../../models/item';
 import { Case } from '../../models/case';
@@ -30,7 +31,7 @@ export class MediaListPage {
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
                public navParams: NavParams, public nativeAudio: NativeAudio, public base64: Base64,
-              public speechApi: SpeechApi) {
+              public speechApi: SpeechApi, public file: File) {
     this.case = this.navParams.data.case;
     this.caseMedia = this.navParams.data.caseMedia;
     for (let item of this.caseMedia) {
@@ -134,29 +135,25 @@ export class MediaListPage {
     });
   }
 
-  GoogleSpeechAPIRequest (duration) {
-    let audioPath: string = '../../assets/data/caseMedia/1/test.wav';
-
-    let audioContentB64: any = this.getBase64encoding(audioPath);
-
+  GoogleSpeechAPIRequest (duration, audioContentB64, speechApi: SpeechApi, shortRecogCallback, longRecogCallback) {
     //Audio Specifications
-    let config: any = { encoding:"FLAC", //May be optional
-                        sampleRateHertz: 16000, //May be optional
+    let config: any = { encoding:"LINEAR16", //May be optional
+                        //sampleRateHertz: 16000, //May be optional
                         languageCode: "en-US",
                         enableWordTimeOffsets: true };
 
-    let audio: any =  { "uri":"gs://cloud-samples-tests/speech/brooklyn.flac" }//content: audioContentB64 };
+    let audio: any =  { //"uri":"gs://cloud-samples-tests/speech/brooklyn.flac" }
+                        content: audioContentB64 };
 
     let params: any =  {  config: config,
                           audio: audio,  };
 
     let paramsJSONstring: any = JSON.stringify(params);
-    console.log("paramsjasonString = " + paramsJSONstring);
 
     if (duration <= 30) {
-      this.speechApi.postShort(paramsJSONstring, this.shortRecogCallback);
+      speechApi.postShort(paramsJSONstring, shortRecogCallback);
     } else {
-      this.speechApi.postLong(paramsJSONstring, this.longRecogCallback)
+      speechApi.postLong(paramsJSONstring, longRecogCallback)
     }
   }
 
@@ -170,25 +167,34 @@ export class MediaListPage {
     console.log("ABfunction",response);
   }
 
-  getBase64encoding (audioPath: string) {
+  getBase64encoding (duration, GoogleSpeechAPIRequestFn, speechApi: SpeechApi, shortRecogCallback, longRecogCallback) {
+    let audioPath: string = 'file:///android_asset/www/assets/data/caseMedia/1';
+    // this.base64.encodeFile(audioPath)
+    // .then(function(base64File) {
+    //   console.log(base64File);
+    //   GoogleSpeechAPIRequestFn(duration, base64File, speechApi, shortRecogCallback, longRecogCallback);
+    // }, function(err) {
+    //   console.log("error Base 64 Encoding", err);
+    // });
 
-    this.base64.encodeFile(audioPath)
-    .then((base64File: string) => {
-      console.log(base64File);
-      return base64File;
-    }, (err) => {
+
+    this.file.readAsDataURL(audioPath, 'test.wav')
+      .then(function(base64File) {
+            let split: any  = base64File.split("base64,");
+            GoogleSpeechAPIRequestFn(duration, split[1], speechApi, shortRecogCallback, longRecogCallback);
+      },  function(err) {
+            console.log("error Base 64 Encoding", err);
+      });
+  }
+
+  abc() {
+    this.file.listDir('file:///android_asset/www/assets/data/caseMedia', '1')
+    .then(function(list) {
+      console.log("list", list);
+      //GoogleSpeechAPIRequestFn(duration, base64File, speechApi, shortRecogCallback, longRecogCallback);
+    }, function(err) {
       console.log(err);
-      return err;
     });
-    // var reader = new FileReader();
-    // reader.onload = function (event) {
-    //   let target: any = event.target;
-    //   var data = target.result.split(',')
-    //     , decodedImageData = btoa(data[1]);
-    //   //callback(decodedImageData);
-    // };
-    // reader.readAsDataURL(audioFile);
-
   }
 
 }
