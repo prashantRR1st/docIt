@@ -4,9 +4,9 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Camera } from '@ionic-native/camera';
 import { NativeAudio } from '@ionic-native/native-audio';
-import { Base64 } from '@ionic-native/base64';
 import { File } from '@ionic-native/file';
 import { MediaCapture } from '@ionic-native/media-capture';
+import { Media } from '@ionic-native/media';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule, Storage } from '@ionic/storage';
@@ -70,7 +70,7 @@ export function provideSettings(storage: Storage) {
     User,
     Camera,
     NativeAudio,
-    Base64,
+    Media,
     File,
     MediaCapture,
     SplashScreen,
