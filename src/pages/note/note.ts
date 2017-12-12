@@ -19,7 +19,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NotePage {
 
+  noteName: any;
+  noteText: any;
+  aboutText: any;
+  selectedNote: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.selectedNote = navParams.get('selectedNote');
+    this.noteText = this.selectedNote.noteText;
+    this.noteName = this.selectedNote.name;
+    this.aboutText = this.selectedNote.message;
+    console.log("noteText", this.noteText);
   }
 
   ionViewDidLoad() {

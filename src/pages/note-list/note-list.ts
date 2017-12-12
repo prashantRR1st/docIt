@@ -68,9 +68,9 @@ export class NoteListPage {
   /**
    * Navigate to the detail page for this item.
    */
-  openItem(caseMedia: CaseMedia) {
+  openItem(selectedNote: CaseMedia) {
     this.navCtrl.push('NotePage', {
-      caseMedia: caseMedia
+      selectedNote: selectedNote
     });
   }
 

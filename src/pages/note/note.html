@@ -8,14 +8,14 @@
 <ion-header>
 
     <ion-navbar>
-      <ion-title>Note Title</ion-title>
+      <ion-title>{{ noteName }}</ion-title>
     </ion-navbar>
 
   </ion-header>
 
 <ion-content class="NotePage">
   <ion-item class="textInput">
-    <ion-label color="primary" floating>Note1</ion-label>
-    <ion-textarea rows="5000" autosize class="textInput"></ion-textarea>
+    <ion-label color="primary" floating>{{ aboutText }}</ion-label>
+    <ion-textarea rows="5000" autosize [(ngModel)]="noteText" class="textInput"></ion-textarea>
   </ion-item>
 </ion-content>
