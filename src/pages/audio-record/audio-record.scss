@@ -1,0 +1,88 @@
+page-audio-record {
+
+  .main-view{
+    background: transparent;
+  }
+
+  .overlayHeader {
+    //position: relative;
+    width: 70%;
+    //height: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
+    top: 15%;
+    border-radius: 15px;
+    background: transparent;
+  }
+
+  .overlayNavBar {
+    //position: relative;
+    // height: 70%;
+    // margin-top: 15%;
+    // margin-bottom: 15%;
+    box-shadow: 0 10px 50px rgb(62, 144, 221);
+    border-radius: 15px;
+  }
+
+  .modal_content {
+    position: absolute;
+    top: calc(25%);
+    margin-left: 15%;
+    margin-right: 15%;
+    //right: 2;
+    width: 70%;
+    height: 50%;
+    padding: 10px;
+    z-index: 100;
+    //margin: 0 auto;
+    //padding: 10px;
+    color: #333;
+    background: #e8e8e8;
+    background: -moz-linear-gradient(top, #fff 0%, #e8e8e8 100%);
+    background: -webkit-linear-gradient(top, #fff 0%, #e8e8e8 100%);
+    background: linear-gradient(to bottom, #fff 0%, #e8e8e8 100%);
+    border-radius: 10px;
+    box-shadow: 0 10px 50px rgb(62, 144, 221);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .buttton-start-recording,
+  .buttton-start-recording.activated {
+      background-color: red;
+  }
+
+  .buttton-start-recording:hover:not(.disable-hover) {
+      background-color: #ff6666;
+  }
+
+  .buttton-stop-recording,
+  .buttton-stop-recording.activated {
+      background-color: orange;
+  }
+
+  .buttton-stop-recording:hover:not(.disable-hover) {
+      background-color: #ffc966;
+  }
+
+  .buttton-start-playback,
+  .buttton-start-playback.activated {
+      background-color: green;
+  }
+
+  .buttton-start-playback:hover:not(.disable-hover) {
+      background-color: #80ff80;
+  }
+
+  .buttton-stop-playback,
+  .buttton-stop-playback.activated {
+      background-color: blue;
+  }
+
+  .buttton-stop-playback:hover:not(.disable-hover) {
+      background-color: #387ef5;
+  }
+
+}
