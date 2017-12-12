@@ -39,6 +39,7 @@
     "date": "2017-06-11",
     "fileName": "test.txt",
     "message": "Hey! We won!",
+    "noteText": "",
     "imgUrl": "sanjana.jpg"
   }, {
     "id": 5,

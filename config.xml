@@ -79,6 +79,7 @@
     </platform>
     <allow-navigation href="http://169.254.80.80:8100" />
     <allow-navigation href="http://:8100" />
+    <allow-navigation href="http://192.168.56.1:8100" />
     <engine name="browser" spec="~5.0.1" />
     <engine name="android" spec="~6.3.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
@@ -90,5 +91,5 @@
     <plugin name="cordova-plugin-file" spec="^5.0.0" />
     <plugin name="cordova-plugin-media-capture" spec="^2.0.0" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
-    <plugin name="com-badrit-base64" spec="^0.2.0" />
+    <plugin name="cordova-plugin-media" spec="^4.0.0" />
 </widget>

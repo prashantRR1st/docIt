@@ -39,6 +39,7 @@
     "date": "2017-09-21",
     "fileName": "test.txt",
     "message": "What about second breakfast?",
+    "noteText": "Mushrooms!",
     "imgUrl": "perigrin.jpg"
   }, {
     "id": 5,
