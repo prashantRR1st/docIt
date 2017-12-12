@@ -59,11 +59,10 @@ export class ItemDetailPage {
         //3. Record Media
         //4. Send Media (and JSON Details) to Case Media Provider
         if (mediaType == "note") {
-            console.log("WTF");
             this.caseMediaProvider.add(item, mediaType, this.caseMedia.length, this.takeNote());
         } else if (mediaType != "note") {
-            console.log("reached");
-            this.caseMediaProvider.add(item, mediaType, this.caseMedia.length, undefined ,this.record(mediaType));
+            //this.caseMediaProvider.add(item, mediaType, this.caseMedia.length, undefined ,this.record(mediaType));
+            this.record(mediaType, item, this.caseMedia.length, this.addAudio);
         }
         //this.items.add(item);
       }
@@ -78,60 +77,109 @@ export class ItemDetailPage {
     };
   }
 
-  record(mediaType) {
+  record(mediaType, item, caseMediaLength, addAudio) {
     switch(mediaType) {
       case 'img': {
-        return this.captureImage();
+        this.captureImage(mediaType, item, this.IVAcallback);
+        break;
       }
       case 'vid': {
-        return this.recordVideo();
+        this.recordVideo(mediaType, item, this.IVAcallback);
+        break;
       }
       case 'aud': {
-        return this.recordAudio();
+        this.AudioRecord(item, caseMediaLength, mediaType, addAudio)
+        //this.recordAudio(mediaType, item, this.IVAcallback);
+        break;
       }
     }
   }
 
-  captureImage() {
+  AudioRecord(inputDetails, caseMediaLength, mediaType, addAudio) {
+    let addModal = this.modalCtrl.create('AudioRecordPage',
+    { caseId: this.case.id,
+      inputDetails: inputDetails
+    });
+    addModal.onDidDismiss(item => {
+      if (item.created) {
+        console.log('audio added');
+        addAudio(inputDetails, caseMediaLength, mediaType, item.duration)
+      } else {
+        console.log('audio not added');
+      }
+    })
+    addModal.present();
+  }
+
+  addAudio(inputDetails, currLength, mediaType, duration) {
+    let newItemAudio: any = {
+      "id": currLength+1,
+      "name": inputDetails.name,
+      "type": mediaType,
+      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".wav",
+      "time": inputDetails.time,
+      "date": inputDetails.date,
+      "fileName": inputDetails.name + ".wav",
+      "duration": duration,
+      "message": inputDetails.about,
+      "imgUrl": inputDetails.profilePic
+    }
+
+    let newItemNote: any = {
+      "id": currLength+2,
+      "name": inputDetails.name + ' - note',
+      "type": 'note',
+      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".wav",
+      "time": inputDetails.time,
+      "date": inputDetails.date,
+      "fileName": inputDetails.name + ".wav",
+      "message": inputDetails.about,
+      "noteText": "",
+      "imgUrl": inputDetails.profilePic
+    }
+  }
+
+  IVAcallback(mediaType, item, mediaFile: MediaFile) {
+    this.caseMediaProvider.add(item, mediaType, this.caseMedia.length, undefined , mediaFile);
+  }
+
+  captureImage(mediaType, item, callback) {
     let imageData: MediaFile;
     let options: CaptureImageOptions = { limit: 1 };
     this.mediaCapture.captureImage(options)
       .then(
         (data: MediaFile[]) => {
           console.log(data);
-          imageData = data[0];
+          callback(mediaType, item, data[0]);
         },
         (err: CaptureError) => console.error(err)
       );
-    return imageData;
   }
 
-  recordVideo() {
+  recordVideo(mediaType, item, callback) {
     let videoData: MediaFile;
     let options: CaptureVideoOptions = { limit: 1 };
     this.mediaCapture.captureVideo(options)
     .then(
       (data: MediaFile[]) => (data: MediaFile[]) => {
         console.log(data);
-        videoData = data[0];
+        callback(mediaType, item, data[0]);
       },
       (err: CaptureError) => console.error(err)
     );
-    return videoData;
   }
 
-  recordAudio() {
+  recordAudio(mediaType, item, callback) {
     let audioData: MediaFile;
     let options: CaptureAudioOptions = { limit: 1 };
     this.mediaCapture.captureAudio(options)
     .then(
       (data: MediaFile[]) => (data: MediaFile[]) => {
         console.log(data);
-        audioData = data[0];
+        callback(mediaType, item, data[0]);
       },
       (err: CaptureError) => console.error(err)
     );
-    return audioData;
   }
 
   takeNote() {
