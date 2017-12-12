@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
-import { Base64 } from '@ionic-native/base64';
 import { File } from '@ionic-native/file';
 
 import { Item } from '../../models/item';
@@ -30,8 +29,7 @@ export class MediaListPage {
   PlayPauseIcon: String = "play";
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
-               public navParams: NavParams, public nativeAudio: NativeAudio, public base64: Base64,
-              public speechApi: SpeechApi, public file: File) {
+               public navParams: NavParams, public nativeAudio: NativeAudio, public speechApi: SpeechApi, public file: File) {
     this.case = this.navParams.data.case;
     this.caseMedia = this.navParams.data.caseMedia;
     for (let item of this.caseMedia) {
@@ -169,14 +167,6 @@ export class MediaListPage {
 
   getBase64encoding (duration, GoogleSpeechAPIRequestFn, speechApi: SpeechApi, shortRecogCallback, longRecogCallback) {
     let audioPath: string = 'file:///android_asset/www/assets/data/caseMedia/1';
-    // this.base64.encodeFile(audioPath)
-    // .then(function(base64File) {
-    //   console.log(base64File);
-    //   GoogleSpeechAPIRequestFn(duration, base64File, speechApi, shortRecogCallback, longRecogCallback);
-    // }, function(err) {
-    //   console.log("error Base 64 Encoding", err);
-    // });
-
 
     this.file.readAsDataURL(audioPath, 'test.wav')
       .then(function(base64File) {
@@ -191,7 +181,6 @@ export class MediaListPage {
     this.file.listDir('file:///android_asset/www/assets/data/caseMedia', '1')
     .then(function(list) {
       console.log("list", list);
-      //GoogleSpeechAPIRequestFn(duration, base64File, speechApi, shortRecogCallback, longRecogCallback);
     }, function(err) {
       console.log(err);
     });
