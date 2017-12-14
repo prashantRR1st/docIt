@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Camera } from '@ionic-native/camera';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
 import { MediaCapture } from '@ionic-native/media-capture';
 import { Media } from '@ionic-native/media';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -72,6 +73,7 @@ export function provideSettings(storage: Storage) {
     NativeAudio,
     Media,
     File,
+    FileTransfer,
     MediaCapture,
     SplashScreen,
     StatusBar,
