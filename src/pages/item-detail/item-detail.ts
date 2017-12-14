@@ -119,34 +119,9 @@ export class ItemDetailPage {
 
   addAudio(inputDetails, caseMedia: CaseMedia[], mediaType, duration, getBase64encoding, fileConvertAPIRequest, GoogleSpeechAPIRequestFn,
     speechApi: SpeechApi, file: File, shortRecogCallback, longRecogCallback, longResponseFinal) {
-    let newItemAudio: any = {
-      "id": caseMedia.length+1,
-      "name": inputDetails.name,
-      "type": mediaType,
-      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".aac",
-      "time": inputDetails.time,
-      "date": inputDetails.date,
-      "fileName": inputDetails.name + ".aac",
-      "duration": duration,
-      "message": inputDetails.about,
-      "imgUrl": inputDetails.profilePic
-    }
 
     getBase64encoding(caseMedia, duration, inputDetails, fileConvertAPIRequest, GoogleSpeechAPIRequestFn, speechApi,
       file, shortRecogCallback, longRecogCallback, longResponseFinal)
-
-    let newItemNote: any = {
-      "id": caseMedia.length+2,
-      "name": inputDetails.name + ' - note',
-      "type": 'note',
-      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".aac",
-      "time": inputDetails.time,
-      "date": inputDetails.date,
-      "fileName": inputDetails.name + ".aac",
-      "message": inputDetails.about,
-      "noteText": "",
-      "imgUrl": inputDetails.profilePic
-    }
   }
 
   getBase64encoding (caseMedia: CaseMedia[], duration, inputDetails, fileConvertAPIRequest, GoogleSpeechAPIRequestFn, speechApi: SpeechApi,
@@ -169,7 +144,10 @@ export class ItemDetailPage {
         conversion: [ {
             category: "audio",
             target: "flac",
-            options: { frequency: 16000 }
+            options: {
+              frequency: 16000,
+              channels: "mono"
+            }
           } ]
       }
 
@@ -179,7 +157,7 @@ export class ItemDetailPage {
         speechApi, shortRecogCallback, longRecogCallback, longResponseFinal);
   }
 
-  GoogleSpeechAPIRequest (duration, audioContentB64, speechApi: SpeechApi, caseMedia: CaseMedia[], shortRecogCallback, longRecogCallback, longResponseFinal) {
+  GoogleSpeechAPIRequest (inputDetails, duration, audioContentB64, speechApi: SpeechApi, caseMedia: CaseMedia[], shortRecogCallback, longRecogCallback, longResponseFinal) {
 
     let config: any = {
       encoding:"FLAC", //May be optional
@@ -200,28 +178,85 @@ export class ItemDetailPage {
     let paramsJSONstring: any = JSON.stringify(params);
 
     if (duration <= 59) {
-      speechApi.postShort(paramsJSONstring, shortRecogCallback, caseMedia);
+      speechApi.postShort(paramsJSONstring, shortRecogCallback, inputDetails, duration, caseMedia);
     } else {
-      speechApi.postLong(paramsJSONstring, longRecogCallback, speechApi.getOperationLong, longResponseFinal, caseMedia);
+      speechApi.postLong(paramsJSONstring, longRecogCallback, speechApi.getOperationLong, longResponseFinal, inputDetails, duration, caseMedia);
     }
   }
 
-  shortRecogCallback(response, caseMedia: CaseMedia[]) {
+  shortRecogCallback(response, inputDetails, duration, caseMedia: CaseMedia[]) {
+    let words: any = response.words;
+    let transcript: any  = response.transcript;
+    let newItemAudio: any = {
+      "id": caseMedia.length+1,
+      "name": inputDetails.name,
+      "type": 'aud',
+      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".aac",
+      "time": inputDetails.time,
+      "date": inputDetails.date,
+      "fileName": inputDetails.name + ".aac",
+      "duration": duration,
+      "message": inputDetails.about,
+      "imgUrl": inputDetails.profilePic
+    }
+
+    let newItemNote: any = {
+      "id": caseMedia.length+2,
+      "name": inputDetails.name + ' - note',
+      "type": 'note',
+      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".aac",
+      "time": inputDetails.time,
+      "date": inputDetails.date,
+      "fileName": inputDetails.name + ".aac",
+      "message": inputDetails.about,
+      "noteText": transcript,
+      "imgUrl": inputDetails.profilePic
+    }
+
+    caseMedia.push(newItemAudio);
+    caseMedia.push(newItemNote);
+
     console.log("shortRecogCallback",response);
-    console.log("Global Scope", caseMedia);
-    let transcript: any  = response.transcript;
-    let words: any = response.words;
   }
 
-  longRecogCallback(response, getOperationLong, longResponseFinal, caseMedia: CaseMedia[]) {
+  longRecogCallback(response, getOperationLong, longResponseFinal, inputDetails, duration, caseMedia: CaseMedia[]) {
     console.log("longRecogCallback",response);
-    setTimeout(getOperationLong(response, longResponseFinal, caseMedia), 30000);
+    setTimeout(getOperationLong(response, longResponseFinal, inputDetails, duration, caseMedia), 30000);
   }
 
-  longResponseFinal(response, caseMedia: CaseMedia[]) {
+  longResponseFinal(response, inputDetails, duration, caseMedia: CaseMedia[]) {
     console.log("longResponseFinal",response);
-    let transcript: any  = response.transcript;
+
     let words: any = response.words;
+    let transcript: any  = response.transcript;
+    let newItemAudio: any = {
+      "id": caseMedia.length+1,
+      "name": inputDetails.name,
+      "type": 'aud',
+      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".aac",
+      "time": inputDetails.time,
+      "date": inputDetails.date,
+      "fileName": inputDetails.name + ".aac",
+      "duration": duration,
+      "message": inputDetails.about,
+      "imgUrl": inputDetails.profilePic
+    }
+
+    let newItemNote: any = {
+      "id": caseMedia.length+2,
+      "name": inputDetails.name + ' - note',
+      "type": 'note',
+      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".aac",
+      "time": inputDetails.time,
+      "date": inputDetails.date,
+      "fileName": inputDetails.name + ".aac",
+      "message": inputDetails.about,
+      "noteText": transcript,
+      "imgUrl": inputDetails.profilePic
+    }
+
+    caseMedia.push(newItemAudio);
+    caseMedia.push(newItemNote);
   }
 
   IVAcallback(mediaType, item, mediaFile: MediaFile) {

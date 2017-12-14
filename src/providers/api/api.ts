@@ -15,7 +15,7 @@ export class SpeechApi {
   fileTransfer: FileTransferObject;
 
   constructor(public http: HttpClient, public transfer: FileTransfer, public file: File) {
-    const fileTransfer: FileTransferObject = this.transfer.create();
+    this.fileTransfer = this.transfer.create();
   }
 
   get(endpoint: string, params?: any, reqOpts?: any) {
@@ -46,8 +46,8 @@ export class SpeechApi {
     var getStatusFileConvert = this.getStatusFileConvert;
     var downloadConvertedFile = this.downloadConvertedFile;
     var encodeBase64 = this.encodeBase64;
-    var fileTransfer = this.fileTransfer;
-    var file = this.file;
+    var fileTransfer: FileTransferObject = this.fileTransfer;
+    var file: File = this.file;
 
     let xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -150,21 +150,21 @@ export class SpeechApi {
     file.readAsDataURL(audioPath, inputDetails.name + ".flac")
     .then(function(base64File) {
       let split: any  = base64File.split("base64,");
-      GoogleSpeechAPIRequestFn(duration, split[1], speechApi, caseMedia,
+      GoogleSpeechAPIRequestFn(inputDetails, duration, split[1], speechApi, caseMedia,
         shortRecogCallback, longRecogCallback, longResponseFinal);
     },  function(err) {
           console.log("error Base 64 Encoding", err);
     });
   }
 
-  postShort(paramsJSONstring, shortRecogCallback, caseMedia) {
+  postShort(paramsJSONstring, shortRecogCallback, inputDetails, duration, caseMedia) {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', this.url+ 'recognize' + '?key='+ this.apiKey, true );
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.onload = function() {
       var response = JSON.parse(xhr.responseText);
-      shortRecogCallback(response.results[0].alternatives[0], caseMedia);
+      shortRecogCallback(response.results[0].alternatives[0], inputDetails, duration, caseMedia);
     };
 
     xhr.onerror = function(error) {
@@ -174,14 +174,14 @@ export class SpeechApi {
     xhr.send(paramsJSONstring);
   }
 
-  postLong(paramsJSONstring, longRecogCallback, getOperationLong, longResponseFinal, caseMedia) {
+  postLong(paramsJSONstring, longRecogCallback, getOperationLong, longResponseFinal, inputDetails, duration, caseMedia) {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', this.url+ 'longrunningrecognize' + '?key='+ this.apiKey, true );
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.onload = function() {
       var response = JSON.parse(xhr.responseText);
-      longRecogCallback(response.name, getOperationLong, longResponseFinal, caseMedia);
+      longRecogCallback(response.name, getOperationLong, longResponseFinal, inputDetails, duration, caseMedia);
     };
 
     xhr.onerror = function(error) {
@@ -191,14 +191,14 @@ export class SpeechApi {
     xhr.send(paramsJSONstring);
   }
 
-  getOperationLong (operationName, longResponseFinal, caseMedia) {
+  getOperationLong (operationName, longResponseFinal, inputDetails, duration, caseMedia) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', this.longRecogOperationURL + operationName + '?key='+ this.apiKey, true );
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.onload = function() {
       var response = JSON.parse(xhr.responseText);
-      longResponseFinal(response.results[0].alternatives[0], caseMedia)
+      longResponseFinal(response.results[0].alternatives[0], inputDetails, duration, caseMedia)
     };
 
     xhr.onerror = function(error) {
