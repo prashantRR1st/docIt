@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-native/media-capture';
+import { File } from '@ionic-native/file';
 
 import { Item } from '../../models/item';
 import { Case } from '../../models/case';
 import { CaseMedia } from '../../models/caseMedia';
 import { Items } from '../../providers/providers';
 import { CaseMediaProvider } from '../../providers/providers';
+import { SpeechApi } from '../../providers/api/api';
 
 import { Tab1Media } from '../pages';
 import { Tab2Media } from '../pages';
@@ -39,7 +41,7 @@ export class ItemDetailPage {
 
   constructor(public navParams: NavParams, public caseMediaProvider: CaseMediaProvider,
     public items: Items, public navCtrl: NavController, public modalCtrl: ModalController,
-    public mediaCapture: MediaCapture) {
+    public mediaCapture: MediaCapture, public file: File, public speechApi: SpeechApi) {
     this.case = navParams.get('item') || items.defaultItem;
     caseMediaProvider.setCase(this.case);
 
@@ -88,14 +90,17 @@ export class ItemDetailPage {
         break;
       }
       case 'aud': {
-        this.AudioRecord(item, caseMediaLength, mediaType, addAudio)
+        this.AudioRecord(item, this.caseMedia, mediaType, this.addAudio, this.getBase64encoding, this.fileConvertAPIRequest,
+          this.GoogleSpeechAPIRequest, this.speechApi, this.file, this.shortRecogCallback, this.longRecogCallback, this.longResponseFinal)
         //this.recordAudio(mediaType, item, this.IVAcallback);
         break;
       }
     }
   }
 
-  AudioRecord(inputDetails, caseMediaLength, mediaType, addAudio) {
+  AudioRecord(inputDetails, caseMedia: CaseMedia[], mediaType, addAudio, getBase64encoding,
+    fileConvertAPIRequest, GoogleSpeechAPIRequestFn, speechApi: SpeechApi, file: File, shortRecogCallback,
+    longRecogCallback, longResponseFinal) {
     let addModal = this.modalCtrl.create('AudioRecordPage',
     { caseId: this.case.id,
       inputDetails: inputDetails
@@ -103,7 +108,8 @@ export class ItemDetailPage {
     addModal.onDidDismiss(item => {
       if (item.created) {
         console.log('audio added');
-        addAudio(inputDetails, caseMediaLength, mediaType, item.duration)
+        addAudio(inputDetails, caseMedia, mediaType, item.duration, getBase64encoding,
+          fileConvertAPIRequest, GoogleSpeechAPIRequestFn, speechApi, file, shortRecogCallback, longRecogCallback, longResponseFinal)
       } else {
         console.log('audio not added');
       }
@@ -111,32 +117,111 @@ export class ItemDetailPage {
     addModal.present();
   }
 
-  addAudio(inputDetails, currLength, mediaType, duration) {
+  addAudio(inputDetails, caseMedia: CaseMedia[], mediaType, duration, getBase64encoding, fileConvertAPIRequest, GoogleSpeechAPIRequestFn,
+    speechApi: SpeechApi, file: File, shortRecogCallback, longRecogCallback, longResponseFinal) {
     let newItemAudio: any = {
-      "id": currLength+1,
+      "id": caseMedia.length+1,
       "name": inputDetails.name,
       "type": mediaType,
-      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".wav",
+      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".aac",
       "time": inputDetails.time,
       "date": inputDetails.date,
-      "fileName": inputDetails.name + ".wav",
+      "fileName": inputDetails.name + ".aac",
       "duration": duration,
       "message": inputDetails.about,
       "imgUrl": inputDetails.profilePic
     }
 
+    getBase64encoding(caseMedia, duration, inputDetails, fileConvertAPIRequest, GoogleSpeechAPIRequestFn, speechApi,
+      file, shortRecogCallback, longRecogCallback, longResponseFinal)
+
     let newItemNote: any = {
-      "id": currLength+2,
+      "id": caseMedia.length+2,
       "name": inputDetails.name + ' - note',
       "type": 'note',
-      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".wav",
+      "fullPath": "file:///storage/emulated/0/" + inputDetails.name + ".aac",
       "time": inputDetails.time,
       "date": inputDetails.date,
-      "fileName": inputDetails.name + ".wav",
+      "fileName": inputDetails.name + ".aac",
       "message": inputDetails.about,
       "noteText": "",
       "imgUrl": inputDetails.profilePic
     }
+  }
+
+  getBase64encoding (caseMedia: CaseMedia[], duration, inputDetails, fileConvertAPIRequest, GoogleSpeechAPIRequestFn, speechApi: SpeechApi,
+    file: File, shortRecogCallback, longRecogCallback, longResponseFinal) {
+    let audioPath: string = 'file:///storage/emulated/0';
+    file.readAsDataURL(audioPath, inputDetails.name + ".aac")
+      .then(function(base64File) {
+            let split: any  = base64File.split("base64,");
+            fileConvertAPIRequest(caseMedia, inputDetails, duration, base64File, GoogleSpeechAPIRequestFn,
+               speechApi, shortRecogCallback, longRecogCallback, longResponseFinal)
+            //GoogleSpeechAPIRequestFn(duration, split[1], speechApi, shortRecogCallback, longRecogCallback, longResponseFinal);
+      },  function(err) {
+            console.log("error Base 64 Encoding", err);
+      });
+  }
+
+  fileConvertAPIRequest (caseMedia: CaseMedia[], inputDetails, duration, audioContentB64, GoogleSpeechAPIRequestFn,
+    speechApi: SpeechApi, shortRecogCallback, longRecogCallback, longResponseFinal) {
+      let fileConvertParams: any = {
+        conversion: [ {
+            category: "audio",
+            target: "flac",
+            options: { frequency: 16000 }
+          } ]
+      }
+
+      let JSONstringConvertParams: any = JSON.stringify(fileConvertParams);
+
+      speechApi.postConvertEmptyJob(caseMedia, inputDetails, JSONstringConvertParams, duration, audioContentB64, GoogleSpeechAPIRequestFn,
+        speechApi, shortRecogCallback, longRecogCallback, longResponseFinal);
+  }
+
+  GoogleSpeechAPIRequest (duration, audioContentB64, speechApi: SpeechApi, caseMedia: CaseMedia[], shortRecogCallback, longRecogCallback, longResponseFinal) {
+
+    let config: any = {
+      encoding:"FLAC", //May be optional
+      sampleRateHertz: 16000, //May be optional
+      languageCode: "en-US",
+      enableWordTimeOffsets: true
+    };
+
+    let audio: any =  {
+      content: audioContentB64
+    };
+
+    let params: any =  {
+      config: config,
+      audio: audio
+    };
+
+    let paramsJSONstring: any = JSON.stringify(params);
+
+    if (duration <= 59) {
+      speechApi.postShort(paramsJSONstring, shortRecogCallback, caseMedia);
+    } else {
+      speechApi.postLong(paramsJSONstring, longRecogCallback, speechApi.getOperationLong, longResponseFinal, caseMedia);
+    }
+  }
+
+  shortRecogCallback(response, caseMedia: CaseMedia[]) {
+    console.log("shortRecogCallback",response);
+    console.log("Global Scope", caseMedia);
+    let transcript: any  = response.transcript;
+    let words: any = response.words;
+  }
+
+  longRecogCallback(response, getOperationLong, longResponseFinal, caseMedia: CaseMedia[]) {
+    console.log("longRecogCallback",response);
+    setTimeout(getOperationLong(response, longResponseFinal, caseMedia), 30000);
+  }
+
+  longResponseFinal(response, caseMedia: CaseMedia[]) {
+    console.log("longResponseFinal",response);
+    let transcript: any  = response.transcript;
+    let words: any = response.words;
   }
 
   IVAcallback(mediaType, item, mediaFile: MediaFile) {
