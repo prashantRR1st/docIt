@@ -17,7 +17,7 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
+      <button ion-button (click)="done(audio)" [disabled]="!created" strong>
         <span color="primary" showWhen="ios">
           Continue
         </span>
@@ -30,28 +30,36 @@
 
 
 <ion-content class="modal_content" padding>
-  <p>
-    <button (click)="startRecord(audio)" class="buttton-start-recording" >
-      <ion-icon name="microphone"></ion-icon>
-      Start recording
-    </button>
-  </p>
-  <p>
-    <button (click)="stopRecord(audio)" class="buttton-stop-recording" >
-      <ion-icon name="mic-off"></ion-icon>
-      Stop recording
-    </button>
-  </p>
-  <p>
-    <button (click)="play(audio)" class="buttton-start-playback" >
-      <ion-icon name="play"></ion-icon>
-      Start playback
-    </button>
-  </p>
-  <p>
-    <button (click)="pause(audio)" class="buttton-stop-playback">
-      <ion-icon name="square"></ion-icon>
-      Stop playback
-    </button>
-  </p>
+
+  <ion-row>
+    <ion-col>
+      <button (click)="startRecord(audio)" [disabled]="state != 'ready'" class="buttton-start-recording" >
+        <ion-icon name="microphone"></ion-icon>
+        <div>Start recording</div>
+      </button>
+    </ion-col>
+
+    <ion-col>
+      <button (click)="stopRecord(audio)" [disabled]="state != 'recording'" class="buttton-stop-recording" >
+        <ion-icon name="mic-off"></ion-icon>
+        <div>Stop recording</div>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <button (click)="play(audio)" [disabled]="(state != 'recorded') && (state != 'paused')" class="buttton-start-playback" >
+        <ion-icon name="play"></ion-icon>
+        <div>Start playback</div>
+      </button>
+    </ion-col>
+
+    <ion-col>
+      <button (click)="pause(audio)" [disabled]="state != 'playing'" class="buttton-stop-playback">
+        <ion-icon name="square"></ion-icon>
+        <div>Stop playback</div>
+      </button>
+    </ion-col>
+  </ion-row>
+
 </ion-content>
