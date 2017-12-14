@@ -40,6 +40,7 @@
     "fileName": "test.txt",
     "message": "What about second breakfast?",
     "noteText": "Mushrooms!",
+    "words": {},
     "imgUrl": "perigrin.jpg"
   }, {
     "id": 5,

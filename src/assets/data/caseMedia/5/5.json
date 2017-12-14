@@ -40,6 +40,7 @@
     "fileName": "test.txt",
     "message": "Hey! We won!",
     "noteText": "",
+    "words": {},
     "imgUrl": "sanjana.jpg"
   }, {
     "id": 5,
