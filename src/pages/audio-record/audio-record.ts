@@ -21,30 +21,27 @@ export class AudioRecordPage {
   inputDetails: any;
   state: any = '';
   audio: MediaObject;
-  created: boolean = false;
   fileName: string;
   duration: any;
+  created: boolean = false;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams, private media: Media, private file: File) {
     this.caseId = navParams.get('caseId');
     this.inputDetails = navParams.get('inputDetails');
-    this.fileName = this.inputDetails.name + '.wav';
+    this.fileName = this.inputDetails.name + '.aac';
     this.audio = this.media.create(this.fileName);
     this.listDir();
     this.state = 'ready';
-
-
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AudioRecordPage');
   }
 
-  fileDidCreate(fileName, file: File, createdBool) {
+  fileDidCreate(fileName, file: File) {
     file.resolveLocalFilesystemUrl(file.externalRootDirectory + fileName)
       .then(function(result) {
         console.log('TEMP FILE IN', result);
-        createdBool = true;
       })
       .catch(error => console.log("ERROR IN TEMP", error));
   }
@@ -80,7 +77,8 @@ export class AudioRecordPage {
       this.state = 'recorded';
     });
     audio.onError.subscribe(error => console.log('Record Stop Error!', error));
-    this.fileDidCreate(this.fileName, this.file, this.created);
+    this.created = true;
+    this.fileDidCreate(this.fileName, this.file);
   }
 
   play(audio: MediaObject) {
@@ -93,7 +91,6 @@ export class AudioRecordPage {
       this.state = 'playing';
     });
     audio.onError.subscribe(error => console.log('Audio Playback Error!', error));
-    this.duration = audio.getDuration();
   }
 
   pause(audio: MediaObject) {
@@ -106,18 +103,20 @@ export class AudioRecordPage {
       this.state = 'paused';
     });
     audio.onError.subscribe(error => console.log('Audio Pause Error!', error));
+    console.log("DURATION",audio.getDuration());
   }
 
   cancel() {
     this.viewCtrl.dismiss(false);
   }
 
-  done() {
-    if (!this.created || this.duration == -1) { return false; }
+  done(audio: MediaObject) {
+    if (!this.created || audio.getDuration() == -1) { return false; }
     let params = {
       "created": true,
-      "duration": this.duration
+      "duration": audio.getDuration()
     }
+    audio.release();
     this.viewCtrl.dismiss(params);
   }
 
