@@ -14,8 +14,20 @@
   </ion-header>
 
 <ion-content class="NotePage">
-  <ion-item class="textInput">
+  <ion-item class="textInput" style="float: left">
     <ion-label color="primary" floating>{{ aboutText }}</ion-label>
-    <ion-textarea rows="5000" autosize [(ngModel)]="noteText" class="textInput"></ion-textarea>
+    <ion-textarea rows="100" autosize [(ngModel)]="noteText" class="textInput"></ion-textarea>
   </ion-item>
+
+  <ion-list class="wordsList" style="float: right">
+    <ion-item class="itemWord" *ngFor="let item of words">
+      <button class="itemWord" ion-item (click)="openItem(item)">
+        <h2 style="font-family:Monotype Corsiva; font-size: 15px;">{{item.word}}</h2>
+        <h6>Start:</h6>
+        <h6 style="font-family:Times New Roman; font-size: 13px;">{{item.startTime}}</h6>
+        <h6>End:</h6>
+        <h6 style="font-family:Times New Roman; font-size: 13px;">{{item.endTime}}</h6>
+      </button>
+    </ion-item>
+  </ion-list>
 </ion-content>

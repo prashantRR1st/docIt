@@ -210,6 +210,7 @@ export class ItemDetailPage {
       "fileName": inputDetails.name + ".aac",
       "message": inputDetails.about,
       "noteText": transcript,
+      "words": words,
       "imgUrl": inputDetails.profilePic
     }
 
@@ -252,6 +253,7 @@ export class ItemDetailPage {
       "fileName": inputDetails.name + ".aac",
       "message": inputDetails.about,
       "noteText": transcript,
+      "words": words,
       "imgUrl": inputDetails.profilePic
     }
 

@@ -1,7 +1,10 @@
 page-note {
 
   .NotePage{
-    background-image: url('../../assets/img/note.jpg');
+    background-image: url('../assets/img/note.jpg');
+    vertical-align: top;
+    clear: both;
+    overflow: hidden;
   }
 
   .NotePage > ion-content{
@@ -11,7 +14,18 @@ page-note {
   .textInput{
     background-color: transparent;
     // height: 523dp;
-    // width: 391dp;
+    width: 70%;
+  }
+
+  .wordsList{
+    background-image: url('../assets/img/note.jpg');
+    //background-color: transparent;
+    // height: 523dp;
+    width: 30%;
+  }
+
+  .itemWord{
+    background-color: transparent;
   }
 
 

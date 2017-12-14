@@ -23,6 +23,7 @@ export class NotePage {
   noteText: any;
   aboutText: any;
   selectedNote: any;
+  words: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.selectedNote = navParams.get('selectedNote');
