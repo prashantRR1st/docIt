@@ -29,9 +29,4 @@
   <div class="noData" *ngIf="audMedia.length == 0">
     <ion-title>No Voice Memos Found</ion-title>
   </div>
-
-  <button ion-button (click)="getBase64encoding(20, GoogleSpeechAPIRequest, speechApi, shortRecogCallback, longRecogCallback)" *ngIf="audMedia.length != 0">
-    <ion-icon name="home"></ion-icon>
-  </button>
-
 </ion-content>
