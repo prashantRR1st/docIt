@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Response} from '@angular/http';
 import { HttpClient} from '@angular/common/http';
-import { MediaCapture, MediaFile, MediaFileData, CaptureError, CaptureImageOptions, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-native/media-capture';
+//import { MediaCapture, MediaFile, MediaFileData, CaptureError, CaptureImageOptions, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-native/media-capture';
 
 import { Item } from '../../models/item';
 import { Case } from '../../models/case';
 import { CaseMedia } from '../../models/caseMedia';
-import { SpeechApi } from '../api/api';
+//import { SpeechApi } from '../api/api';
 
 
 @Injectable()
@@ -40,46 +39,46 @@ export class CaseMediaProvider {
     });
   }
 
-  add(inputDetails, mediaType, currLength: number, noteFile?: any ,mediaFile?: MediaFile) {
+  add(inputDetails, mediaType, currLength: number, noteFile?: any ,mediaFile?) {//: MediaFile) {
 
-    let newItem: any = {
-      "id": currLength+1,
-      "name": inputDetails.name,
-      "type": mediaType,
-      "fullPath": "",
-      "time": inputDetails.time,
-      "date": inputDetails.date,
-      "fileName": "",
-      "duration": "",
-      "message": "",
-      "imgUrl": ""
-      //MEDIAFILE
-      // "name": mediaFile.name,                            O
-      // "fullPath": mediaFile.fullPath,                    O
-      // "type": mediaFile.type,                            O
-      // "lastModifiedDate": mediaFile.lastModifiedDate,    X
-      // "size": mediaFile.size,                            O
-      //MEDIAFILEDATA
-      // "codecs": mediaFileData.codecs,        X //Not supported
-      // "bitrate": mediaFileData.bitrate,      X //Only iOS4 Audio
-      // "height": mediaFileData.height,        X //Image and Video Only (0 for aud)
-      // "width": mediaFileData.width,          X //Image and Video Only (0 for aud)
-      // "duration":mediaFileData."duration,    O //Aud and Vid Only (0 for Img)
+    // let newItem: any = {
+    //   "id": currLength+1,
+    //   "name": inputDetails.name,
+    //   "type": mediaType,
+    //   "fullPath": "",
+    //   "time": inputDetails.time,
+    //   "date": inputDetails.date,
+    //   "fileName": "",
+    //   "duration": "",
+    //   "message": "",
+    //   "imgUrl": ""
+    //   //MEDIAFILE
+    //   // "name": mediaFile.name,                            O
+    //   // "fullPath": mediaFile.fullPath,                    O
+    //   // "type": mediaFile.type,                            O
+    //   // "lastModifiedDate": mediaFile.lastModifiedDate,    X
+    //   // "size": mediaFile.size,                            O
+    //   //MEDIAFILEDATA
+    //   // "codecs": mediaFileData.codecs,        X //Not supported
+    //   // "bitrate": mediaFileData.bitrate,      X //Only iOS4 Audio
+    //   // "height": mediaFileData.height,        X //Image and Video Only (0 for aud)
+    //   // "width": mediaFileData.width,          X //Image and Video Only (0 for aud)
+    //   // "duration":mediaFileData."duration,    O //Aud and Vid Only (0 for Img)
 
-    }
-    if (mediaFile && !noteFile) {
-      let mediaFileDuration: any; //0 For Img
-      mediaFile.getFormatData(function(formatData){
-        mediaFileDuration = formatData.duration;
-      }, function(error) {
-        console.log("MediaFileData Retrieval Error: ", error);
-      });
+    // }
+    // if (mediaFile && !noteFile) {
+    //   let mediaFileDuration: any; //0 For Img
+    //   mediaFile.getFormatData(function(formatData){
+    //     mediaFileDuration = formatData.duration;
+    //   }, function(error) {
+    //     console.log("MediaFileData Retrieval Error: ", error);
+    //   });
 
-    } else if (noteFile && !mediaFile) {
+    // } else if (noteFile && !mediaFile) {
 
-    } else {
+    // } else {
 
-    }
+    // }
   }
 
   delete(item: Item) {

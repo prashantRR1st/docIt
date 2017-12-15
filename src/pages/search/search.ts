@@ -15,9 +15,6 @@ export class SearchPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
 
-  /**
-   * Perform a service for the proper items.
-   */
   getItems(ev) {
     let val = ev.target.value;
     if (!val || !val.trim()) {
@@ -31,9 +28,6 @@ export class SearchPage {
     });
   }
 
-  /**
-   * Navigate to the detail page for this item.
-   */
   openItem(item: Item) {
     this.navCtrl.push('ItemDetailPage', {
       item: item

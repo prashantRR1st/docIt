@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
+//import { TranslateService } from '@ngx-translate/core';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-native/media-capture';
 import { File } from '@ionic-native/file';
 
-import { Item } from '../../models/item';
 import { Case } from '../../models/case';
 import { CaseMedia } from '../../models/caseMedia';
 import { Items } from '../../providers/providers';
@@ -54,19 +53,13 @@ export class ItemDetailPage {
     addModal.onDidDismiss(item => {
       if (item) {
         console.log("media Type: ",mediaType);
-        //1. Construct JSON Details of Object
-        //OR Just send item to Cse Media Provider and construct JSON details there
 
-        //2. Call Media Recorder
-        //3. Record Media
-        //4. Send Media (and JSON Details) to Case Media Provider
         if (mediaType == "note") {
             this.caseMediaProvider.add(item, mediaType, this.caseMedia.length, this.takeNote());
         } else if (mediaType != "note") {
             //this.caseMediaProvider.add(item, mediaType, this.caseMedia.length, undefined ,this.record(mediaType));
-            this.record(mediaType, item, this.caseMedia.length, this.addAudio);
+            this.record(mediaType, item, this.caseMedia.length);
         }
-        //this.items.add(item);
       }
     })
     addModal.present();
@@ -79,7 +72,7 @@ export class ItemDetailPage {
     };
   }
 
-  record(mediaType, item, caseMediaLength, addAudio) {
+  record(mediaType, item, caseMediaLength) {
     switch(mediaType) {
       case 'img': {
         this.captureImage(mediaType, item, this.IVAcallback);
@@ -90,7 +83,7 @@ export class ItemDetailPage {
         break;
       }
       case 'aud': {
-        this.AudioRecord(item, this.caseMedia, mediaType, this.addAudio, this.getBase64encoding, this.fileConvertAPIRequest,
+        this.AudioRecord(item, this.caseMedia, mediaType, this.getBase64encoding, this.fileConvertAPIRequest,
           this.GoogleSpeechAPIRequest, this.speechApi, this.file, this.shortRecogCallback, this.longRecogCallback, this.longResponseFinal)
         //this.recordAudio(mediaType, item, this.IVAcallback);
         break;
@@ -98,7 +91,7 @@ export class ItemDetailPage {
     }
   }
 
-  AudioRecord(inputDetails, caseMedia: CaseMedia[], mediaType, addAudio, getBase64encoding,
+  AudioRecord(inputDetails, caseMedia: CaseMedia[], mediaType, getBase64encoding,
     fileConvertAPIRequest, GoogleSpeechAPIRequestFn, speechApi: SpeechApi, file: File, shortRecogCallback,
     longRecogCallback, longResponseFinal) {
     let addModal = this.modalCtrl.create('AudioRecordPage',
@@ -108,8 +101,8 @@ export class ItemDetailPage {
     addModal.onDidDismiss(item => {
       if (item.created) {
         console.log('audio added');
-        addAudio(inputDetails, caseMedia, mediaType, item.duration, getBase64encoding,
-          fileConvertAPIRequest, GoogleSpeechAPIRequestFn, speechApi, file, shortRecogCallback, longRecogCallback, longResponseFinal)
+        getBase64encoding(caseMedia, item.duration, inputDetails, fileConvertAPIRequest, GoogleSpeechAPIRequestFn, speechApi,
+      file, shortRecogCallback, longRecogCallback, longResponseFinal)
       } else {
         console.log('audio not added');
       }
@@ -117,22 +110,13 @@ export class ItemDetailPage {
     addModal.present();
   }
 
-  addAudio(inputDetails, caseMedia: CaseMedia[], mediaType, duration, getBase64encoding, fileConvertAPIRequest, GoogleSpeechAPIRequestFn,
-    speechApi: SpeechApi, file: File, shortRecogCallback, longRecogCallback, longResponseFinal) {
-
-    getBase64encoding(caseMedia, duration, inputDetails, fileConvertAPIRequest, GoogleSpeechAPIRequestFn, speechApi,
-      file, shortRecogCallback, longRecogCallback, longResponseFinal)
-  }
-
   getBase64encoding (caseMedia: CaseMedia[], duration, inputDetails, fileConvertAPIRequest, GoogleSpeechAPIRequestFn, speechApi: SpeechApi,
     file: File, shortRecogCallback, longRecogCallback, longResponseFinal) {
     let audioPath: string = 'file:///storage/emulated/0';
     file.readAsDataURL(audioPath, inputDetails.name + ".aac")
       .then(function(base64File) {
-            let split: any  = base64File.split("base64,");
             fileConvertAPIRequest(caseMedia, inputDetails, duration, base64File, GoogleSpeechAPIRequestFn,
                speechApi, shortRecogCallback, longRecogCallback, longResponseFinal)
-            //GoogleSpeechAPIRequestFn(duration, split[1], speechApi, shortRecogCallback, longRecogCallback, longResponseFinal);
       },  function(err) {
             console.log("error Base 64 Encoding", err);
       });
@@ -160,8 +144,8 @@ export class ItemDetailPage {
   GoogleSpeechAPIRequest (inputDetails, duration, audioContentB64, speechApi: SpeechApi, caseMedia: CaseMedia[], shortRecogCallback, longRecogCallback, longResponseFinal) {
 
     let config: any = {
-      encoding:"FLAC", //May be optional
-      sampleRateHertz: 16000, //May be optional
+      encoding:"FLAC",
+      sampleRateHertz: 16000,
       languageCode: "en-US",
       enableWordTimeOffsets: true
     };
@@ -266,7 +250,6 @@ export class ItemDetailPage {
   }
 
   captureImage(mediaType, item, callback) {
-    let imageData: MediaFile;
     let options: CaptureImageOptions = { limit: 1 };
     this.mediaCapture.captureImage(options)
       .then(
@@ -279,7 +262,6 @@ export class ItemDetailPage {
   }
 
   recordVideo(mediaType, item, callback) {
-    let videoData: MediaFile;
     let options: CaptureVideoOptions = { limit: 1 };
     this.mediaCapture.captureVideo(options)
     .then(
@@ -292,7 +274,6 @@ export class ItemDetailPage {
   }
 
   recordAudio(mediaType, item, callback) {
-    let audioData: MediaFile;
     let options: CaptureAudioOptions = { limit: 1 };
     this.mediaCapture.captureAudio(options)
     .then(

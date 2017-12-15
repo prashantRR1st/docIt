@@ -1,4 +1,4 @@
-import { Component, Directive, DirectiveDecorator } from '@angular/core';
+import { Component, Directive } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 

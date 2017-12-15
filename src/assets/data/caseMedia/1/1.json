@@ -42,16 +42,11 @@
     "message": "Ronald Weasly! How dare you steal that car!",
     "noteText": "I AM ABSOLUTELY DISGUSTED! YOUR FATHER'S NOW FACING AN INQUIRY AT WORK AND IT'S ENTIRELY YOUR FAULT! IF YOU PUT ANOTHER TOE OUT OF LINE WE'LL BRING YOU STRAIGHT HOME! — Oh, and Ginny dear, congratulations on making Gryffindor. Your father and I are so proud.",
     "words": [
-      {"startTime": "1.200s", "endTime": "1.700s", "word": "this"},
-      {"startTime": "1.700s", "endTime": "2s", "word": "can"},
-      {"startTime": "2s", "endTime": "2.500s", "word": "happen"},
-      {"startTime": "2.500s", "endTime": "3s", "word": "when"},
-      {"startTime": "3s", "endTime": "4.400s", "word": "plugins"},
-      {"startTime": "4.400s", "endTime": "4.700s", "word": "are"},
-      {"startTime": "4.700s", "endTime": "5s", "word": "in"},
-      {"startTime": "5s", "endTime": "5.300s", "word": "an"},
-      {"startTime": "5.300s", "endTime": "6.600s", "word": "inconsistent"},
-      {"startTime": "6.600s", "endTime": "7.200s", "word": "state"}
+      {"startTime": "1.200s", "endTime": "1.700s", "word": "I ... DISGUSTED"},
+      {"startTime": "1.700s", "endTime": "2s", "word": "YOUR ... FAULT"},
+      {"startTime": "2s", "endTime": "2.500s", "word": "IF ... HOME"},
+      {"startTime": "2.500s", "endTime": "3s", "word": "OH ... and"},
+      {"startTime": "3s", "endTime": "4.400s", "word": "I ... proud"}
     ],
     "imgUrl": "molly.jpg"
   }, {

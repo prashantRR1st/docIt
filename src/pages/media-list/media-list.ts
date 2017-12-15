@@ -47,10 +47,6 @@ export class MediaListPage {
     this.navCtrl.push('SearchPage');
   }
 
-  /**
-   * Prompt the user to add a new item. This shows our ItemCreatePage in a
-   * modal and then adds the new item to our data source if the user created one.
-   */
   addItem() {
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
@@ -61,16 +57,10 @@ export class MediaListPage {
     addModal.present();
   }
 
-  /**
-   * Delete an item from the list of items.
-   */
   deleteItem(item) {
     this.items.delete(item);
   }
 
-  /**
-   * Navigate to the detail page for this item.
-   */
   openItem(item: Item) {
     this.navCtrl.push('ItemDetailPage', {
       item: item
@@ -78,8 +68,6 @@ export class MediaListPage {
   }
 
   playOrPause(audioName: string) {
-    // let audio = new Audio('assets/data/caseMedia/'+this.case.id.toString()+'/'+audioName);
-    // audio.play();
     let audioPath: string = 'assets/data/caseMedia/'+this.case.id.toString()+'/'+audioName;
     let audioId: string = 'currentAudio';
     if(this.PlayPauseIcon == 'play'){

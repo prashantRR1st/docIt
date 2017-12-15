@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Item } from '../../models/item';
 import { Case } from '../../models/case';
 import { CaseMedia } from '../../models/caseMedia';
 
