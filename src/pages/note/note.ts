@@ -30,6 +30,7 @@ export class NotePage {
     this.noteText = this.selectedNote.noteText;
     this.noteName = this.selectedNote.name;
     this.aboutText = this.selectedNote.message;
+    this.words = this.selectedNote.words;
     console.log("noteText", this.noteText);
   }
 
