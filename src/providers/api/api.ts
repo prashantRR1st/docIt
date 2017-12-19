@@ -8,10 +8,10 @@ import { File } from '@ionic-native/file';
 @Injectable()
 export class SpeechApi {
   urlDefault: string = 'https://example.com/api/v1';
-  apiKey: string = "AIzaSyAU8ijQDKJHKGrR0nyaETY_F7a3HZ6jpS8";
+  apiKey: string = "Google API Key";
   url: string = 'https://speech.googleapis.com/v1/speech:';
   longRecogOperationURL: string = 'https://speech.googleapis.com/v1/operations/';
-  convertioApiKey: string = '4ae8196301a90a0b56711766055fc2dc';
+  converterApiKey: string = 'Converter API Key';
   fileTransfer: FileTransferObject;
 
   constructor(public http: HttpClient, public transfer: FileTransfer, public file: File) {
@@ -52,7 +52,7 @@ export class SpeechApi {
     let xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
     xhr.open('POST', 'http://api2.online-convert.com/jobs', true );
-    xhr.setRequestHeader("x-oc-api-key", "3976e9617ef2d06c921b7b4d2c1a069f");
+    xhr.setRequestHeader("x-oc-api-key", "Converter API Key");
     xhr.setRequestHeader("content-type", "application/json");
     xhr.setRequestHeader("cache-control", "no-cache");
 
@@ -79,7 +79,7 @@ export class SpeechApi {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', server + '/upload-base64/' + id, true );
     xhr.withCredentials = true;
-    xhr.setRequestHeader("x-oc-api-key", "3976e9617ef2d06c921b7b4d2c1a069f");
+    xhr.setRequestHeader("x-oc-api-key", "Converter API Key");
     xhr.setRequestHeader("content-type", "application/json");
     xhr.setRequestHeader("cache-control", "no-cache");
 
@@ -112,7 +112,7 @@ export class SpeechApi {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://api2.online-convert.com/jobs/'+id, true);
     xhr.withCredentials = true;
-    xhr.setRequestHeader("x-oc-api-key", "3976e9617ef2d06c921b7b4d2c1a069f");
+    xhr.setRequestHeader("x-oc-api-key", "Converter API Key");
     xhr.setRequestHeader("cache-control", "no-cache");
 
     xhr.onreadystatechange = function () {
